@@ -1,9 +1,9 @@
 {
   "basics": {
-    "name": "Mohammad K. Hussain",
-    "nickname": "MAX-786",
-    "label": "Software Developer with expertise in web technologies",
-    "summary": "Passionate about building innovative solutions and contributing to open source projects. Experienced in full-stack development with a focus on modern web technologies.",
+    "name": "Shubham Joshi",
+    "nickname": "Inferno",
+    "label": "Data Scientist with expertise in AI technologies",
+    "summary": "Passionate about building innovative solutions and contributing to Data world. Experienced in Data Science with a focus on modern AI technologies.",
     "location": {
       "city": "",
       "countryCode": "+91",
@@ -12,61 +12,60 @@
     "socials": [
       {
         "network": "email",
-        "url": "mailto:hussainmohammad328@gmail.com"
+        "url": "mailto:shubham05373@gmail.com"
       },
       {
         "network": "github",
-        "url": "https://github.com/MAX-786"
+        "url": "https://github.com/Inferno-721/"
       },
       {
         "network": "linkedin",
-        "url": "https://linkedin.com/in/mohammad-k-hussain"
+        "url": "https://www.linkedin.com/in/shubham-joshi-840a1b1ba/"
       }
     ]
   },
   "work": [
     {
       "name": "Sutra AI (StringVentures)",
-      "position": "SDE Intern",
+      "position": "AI Intern",
       "location_type": "Remote",
       "location": "India",
       "url": "",
       "startDate": "2025-01-01",
       "endDate": null,
-      "summary": "Working on server-side APIs and frontend development",
+      "summary": "Working on creating data pipelines and optimising python code by implementing LLMs",
       "responsibilities": [
-        "Developed and optimized server-side APIs using Node.js and Express, implementing efficient data handling and caching strategies to improve response times",
-        "Implemented dynamic UI components and state management in the Next.js frontend, enhancing user experience and performance",
-        "Collaborated with senior developers to integrate RESTful APIs and handle authentication flows using JWT and OAuth for secure user access"
+        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",        
+        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",       
+        "Migrated VBA code to Python and created comprehensive documentation, reducing processing time and improving client support."
       ]
     },
     {
-      "name": "Plone Foundation",
-      "position": "Google Summer of Code 2024 Participant",
+      "name": "InfoOrigin.INC",
+      "position": "Data Science Intern",
       "location_type": "Remote",
-      "location": "Global",
-      "url": "https://github.com/collective/volto-hydra/tree/main",
-      "startDate": "2024-05-01",
-      "endDate": "2024-08-01",
-      "summary": "Created a proof-of-concept for using Volto as a decoupled editor for Plone through the Hydra project",
+      "location": "India",
+      "url": "",
+      "startDate": "2024-12-16",
+      "endDate": null,
+      "summary": "Gained expertise in LLMs, transformers, and data science through hands-on implementation, dashboard reviews, and structured learning.",
       "responsibilities": [
-        "Created a proof-of-concept for using Volto as a decoupled editor for Plone through the Hydra project, allowing frontends built with any framework (React, Vue, etc.) to edit Plone content",
-        "Implemented a staged approach for frontend integration with Hydra's bridge, enabling basic editing experiences to full Volto-like inline editing",
-        "Developed functionalities for frontends to identify and manage editable blocks within the Hydra editor, including features like block selection, Quanta toolbar integration, and live content updates"
-      ]
+        "Implemented transformers using PyTorch, Hugging Face, and LlamaIndex for AI applications.",  
+        "Completed courses on Python, Data Science, Machine Learning, and Hugging Face Agents.",  
+        "Reviewed LLM response dashboards and conducted chart story analysis for AI evaluation. "]
     },
     {
-      "name": "Hybrid Additive Manufacturing (HAM) Lab, IIITDM Jabalpur",
-      "position": "Web Developer",
+      "name": "CSIR National Aerospace Labrotaries (NAL), Bengaluru",
+      "position": "Research Intern",
       "location_type": "On-site",
-      "location": "Jabalpur, MP",
+      "location": "Bengaluru, Karnataka, India",
       "url": "",
-      "startDate": "2023-09-01",
-      "endDate": "2023-12-01",
-      "summary": "Designed and developed a responsive landing website for the HAM lab",
+      "startDate": "2023-06-01",
+      "endDate": "2023-07-15",
+      "summary": "Designed and developed a UAV for surveillance and monitoring applications.",
       "responsibilities": [
-        "Worked with a team of 8 to design and develop a responsive landing website for the HAM lab at IIITDM Jabalpur",
-        "Conducted user tests and gathered feedback to improve the site's performance and functionality, making it more user-friendly and informative"
+        "Designed a surveillance system for UAVs to improve stability and accuracy.", 
+        "Used data-driven insights to enhance UAV performance and innovation."
       ]
     }
   ],
@@ -78,87 +77,77 @@
       "studyType": "Bachelor of Technology",
       "startDate": "2021-08-01",
       "endDate": "2025-05-01",
-      "summary": "CPI: 7.4"
+      "summary": "CPI: 7.8"
     }
   ],
   "awards": [
     {
-      "title": "Plone Conference 2024 Speaker",
-      "date": "2024",
-      "awarder": "Plone Foundation",
-      "summary": "Invited as a speaker at the Plone Conference 2024 in Brasília, Brazil. Delivered a lightning talk on my GSoC journey with Plone and conducted a live demo showcasing the power of Hydra, a decoupled editor for Plone."
+      "title": "Jensys 2023 Student Ambassador",
+      "date": "2023",
+      "awarder": "AFS India, AFS Japan and Ministry of Foreign Affairs, Japan",
+      "summary": "Invited as a Indian representative and speaker at the Ministry of Foreign Affairs, Japan. Delivered a lightning talk on my journey in Japan and conducted a live disscussions showcasing the Indian culture in Japan."
     },
     {
-      "title": "Bank of Baroda Hackathon Finalist",
+      "title": "Drone Development Challenge Winner",
       "date": "2023",
-      "awarder": "Bank of Baroda",
-      "summary": "Our idea made it into the top 10 in the BoB hackathon."
+      "awarder": "SAE India",
+      "summary": "Developed a high-performance UAV, winning the Drone Development Challenge through advanced aerodynamics and CFD analysis."
     },
     {
       "title": "LeetCode Achievement",
       "date": "Ongoing",
       "awarder": "LeetCode",
-      "summary": "Solved 750+ questions on LeetCode (Profile: HiPHEN001)"
+      "summary": "Solved 250+ questions on LeetCode (Profile: Inferno721)"
     }
   ],
   "skills": {
-    "programming_languages": ["C++", "JavaScript", "Python"],
-    "frameworks": ["React", "Node.js", "Express", "Next.js"],
-    "databases": ["MongoDB", "Firebase"],
-    "tools": ["Git", "Docker", "VS Code", "Unix/Linux"]
+    "programming_languages": ["Python", "SQL", "R"],
+    "frameworks": ["LlamaIndex", "Tensorflow", "Keras", "PyTorch", "Hugging Face"],
+    "libraries": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn", "NLTK", "Spacy", "OpenCV", "BeautifulSoup", "Streamlit", "Plotly", "Transformers"],
+    "databases": ["MySQL", "PostgreSQL", "ChromaDB"],
+    "tools": ["Git", "Docker", "VS Code", "Jupyter Notebook", "Google Colab", "Tableau", "Power BI", "Excel"]
   },
   "projects": [
     {
-      "name": "Saveland",
-      "description": "Linux window management utility for layout preservation across desktop environments",
-      "url": "https://github.com/MAX-786/saveland",
+      "name": "CLOD",
+      "description": "Cold email generator using LLMs",
+      "url": "https://github.com/Inferno-721/Clod",
       "highlights": [
-        "Developed cross-desktop solution supporting both Hyprland (Wayland) and GNOME (X11) environments",
-        "Engineered low-level window manipulation using hyprctl JSON interface and X11 tools (wmctrl/xdotool)",
-        "Implemented workspace-aware window tracking with automatic environment detection",
-        "Solved complex edge cases for application-specific window management (terminals, browsers, IDEs)",
-        "Designed CLI interface with layout versioning and multi-instance application support"
+        "Automates the creation of personalized cold emails by analyzing job descriptions." , 
+        "Extracts key details using GROQ, matches relevance with Chroma DB, and generates drafts with Llama 3.1. ",
+        "Allows customization of tone and content to align with different job applications.",  
+        "Simplifies the job application process by requiring only a job description link."
       ],
       "technologies": [
-        "Bash",
         "Python",
-        "Hyprland",
-        "X11/Wayland",
-        "Linux System Programming"
+        "GROQ",
+        "Streamlit",
+        "Llama 3.1",
+        "Langchain"
       ]
     },
     {
-      "name": "KYPE",
-      "description": "A web application for professor reviews",
-      "url": "https://kype.vercel.app/",
+      "name": "TextGen",
+      "description": "A Multi Modal LLM based tool used to genrate step by step instruction",
+      "url": "https://github.com/Inferno-721/TextGen",
       "highlights": [
-        "Developed React-based frontend for a KYPE web app, creating an intuitive and responsive user interface",
-        "Utilized MongoDB as the backend database for efficient storage and retrieval of professor reviews, ensuring scalability and optimal performance",
-        "Implemented robust features, including user authentication, search functionality, and review submission forms"
+        "Developed React-based frontend for a TextGen web app, creating an intuitive and responsive user interface",
+        "Utilized MultiModal LLM Google Gemini for genrating response from screenshots, ensuring scalability and optimal performance",
+        "Implemented robust features, including step-by-step instructions, image recognition, and text generation"
       ],
-      "technologies": ["React", "MaterialUI", "MongoDB", "Firebase", "Git"]
+      "technologies": ["React", "Tailwind CSS", "Gemini", "Git"]
     },
     {
-      "name": "Qissa the Story Bot",
-      "description": "A Discord bot for collaborative storytelling",
-      "url": "https://github.com/MAX-786/Qissa",
+      "name": "NL2SQL",
+      "description": "A Natural Language to SQL query generator",
+      "url": "https://github.com/Inferno-721/NL2SQL",
       "highlights": [
-        "Developed Qissa, a Discord bot using JavaScript and Discord.js",
-        "Enables story creation, collaboration, and timeline management within Discord servers",
-        "Users can initialize stories, contribute, create timelines, and add events"
+        "Developed a Natural Language to SQL query generator using LLMs",
+        "Implemented a user-friendly interface for seamless interaction",
+        "Utilized advanced NLP techniques to ensure accurate query generation"
       ],
-      "technologies": ["JavaScript", "Node.js", "MongoDB", "Git"]
-    },
-    {
-      "name": "Volto-Hydra",
-      "description": "A decoupled editor for Plone CMS",
-      "url": "https://github.com/collective/volto-hydra/tree/main",
-      "highlights": [
-        "Created a proof-of-concept for using Volto as a decoupled editor for Plone",
-        "Implemented a staged approach for frontend integration with Hydra's bridge",
-        "Developed functionalities for frontends to identify and manage editable blocks"
-      ],
-      "technologies": ["React", "JavaScript", "Plone", "CMS"]
+      "technologies": ["Python", "Streamlit", "Llamaindex", "Llama 3.1"]
+  
     }
   ]
 }

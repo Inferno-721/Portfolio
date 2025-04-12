@@ -1,10 +1,10 @@
 import type { Site, Links } from "@/types";
 
 export const SITE: Site = {
-  TITLE: "MKH",
-  DESCRIPTION: "MAX-786's personal website",
-  AUTHOR: "MAX-786",
-  REPO_URL: "https://github.com/MAX-786/mkhismkh",
+  TITLE: "SSJ",
+  DESCRIPTION: "Inferno's personal website",
+  AUTHOR: "Inferno",
+  REPO_URL: "https://github.com/Inferno-721",
 };
 
 export const LINKS: Links = [
