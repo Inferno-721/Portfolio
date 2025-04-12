@@ -67,6 +67,20 @@
         "Designed a surveillance system for UAVs to improve stability and accuracy.", 
         "Used data-driven insights to enhance UAV performance and innovation."
       ]
+    },
+    {
+      "name": "Personifwy {Microsoft Certified}",
+      "position":"Data Science Intern",
+      "location_type": "Remote",
+      "location": "India",
+      "url": "",
+      "startDate": "2022-11-01",
+      "endDate": "2023-01-15",
+      "summary": "Designed and developed a Chatbot for a startup using LLMs and transformers.",
+      "responsibilities": [
+        "Developed a Chatbot using LLMs and transformers for a startup, enhancing user interaction and support.",
+        "Implemented a recommendation system using LLMs and transformers, improving user experience and engagement."
+      ]
     }
   ],
   "education": [
