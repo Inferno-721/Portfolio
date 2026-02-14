@@ -26,17 +26,32 @@
   },
   "work": [
     {
-      "name": "Sutra AI (StringVentures)",
+      "name": "Sutra.ai",
+      "position": "AI Engineer",
+      "location_type": "Remote",
+      "location": "Michigan, USA",
+      "url": "https://sutra.ai/",
+      "startDate": "2025-01-01",
+      "endDate": "2025-07-15",
+      "summary": "Working on creating data pipelines and optimising python code by implementing LLMs",
+      "responsibilities": [
+        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",
+        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",
+        "Migrated VBA code to Python and created comprehensive documentation, reducing processing time and improving client support."
+      ]
+    },
+    {
+      "name": "Sutra.ai (Stealth Mode)",
       "position": "AI Intern",
       "location_type": "Remote",
       "location": "India",
-      "url": "",
+      "url": "https://sutra.ai/",
       "startDate": "2025-01-01",
-      "endDate": null,
+      "endDate": "2025-07-15",
       "summary": "Working on creating data pipelines and optimising python code by implementing LLMs",
       "responsibilities": [
-        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",        
-        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",       
+        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",
+        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",
         "Migrated VBA code to Python and created comprehensive documentation, reducing processing time and improving client support."
       ]
     },
@@ -45,32 +60,33 @@
       "position": "Data Science Intern",
       "location_type": "Remote",
       "location": "India",
-      "url": "",
+      "url": "https://infoorigin.com/",
       "startDate": "2024-12-16",
-      "endDate": null,
+      "endDate": "2025-06-30",
       "summary": "Gained expertise in LLMs, transformers, and data science through hands-on implementation, dashboard reviews, and structured learning.",
       "responsibilities": [
-        "Implemented transformers using PyTorch, Hugging Face, and LlamaIndex for AI applications.",  
-        "Completed courses on Python, Data Science, Machine Learning, and Hugging Face Agents.",  
-        "Reviewed LLM response dashboards and conducted chart story analysis for AI evaluation. "]
+        "Implemented transformers using PyTorch, Hugging Face, and LlamaIndex for AI applications.",
+        "Completed courses on Python, Data Science, Machine Learning, and Hugging Face Agents.",
+        "Reviewed LLM response dashboards and conducted chart story analysis for AI evaluation. "
+      ]
     },
     {
       "name": "CSIR National Aerospace Labrotaries (NAL), Bengaluru",
       "position": "Research Intern",
       "location_type": "On-site",
       "location": "Bengaluru, Karnataka, India",
-      "url": "",
+      "url": "https://www.nal.res.in/",
       "startDate": "2023-06-01",
       "endDate": "2023-07-15",
       "summary": "Designed and developed a UAV for surveillance and monitoring applications.",
       "responsibilities": [
-        "Designed a surveillance system for UAVs to improve stability and accuracy.", 
+        "Designed a surveillance system for UAVs to improve stability and accuracy.",
         "Used data-driven insights to enhance UAV performance and innovation."
       ]
     },
     {
       "name": "Personifwy {Microsoft Certified}",
-      "position":"Data Science Intern",
+      "position": "Data Science Intern",
       "location_type": "Remote",
       "location": "India",
       "url": "",
@@ -115,11 +131,47 @@
     }
   ],
   "skills": {
-    "programming_languages": ["Python", "SQL", "R"],
-    "frameworks": ["LlamaIndex", "Tensorflow", "Keras", "PyTorch", "Hugging Face"],
-    "libraries": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-learn", "NLTK", "Spacy", "OpenCV", "BeautifulSoup", "Streamlit", "Plotly", "Transformers"],
-    "databases": ["MySQL", "PostgreSQL", "ChromaDB"],
-    "tools": ["Git", "Docker", "VS Code", "Jupyter Notebook", "Google Colab", "Tableau", "Power BI", "Excel"]
+    "programming_languages": [
+      "Python",
+      "SQL",
+      "R"
+    ],
+    "frameworks": [
+      "LlamaIndex",
+      "Tensorflow",
+      "Keras",
+      "PyTorch",
+      "Hugging Face"
+    ],
+    "libraries": [
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Scikit-learn",
+      "NLTK",
+      "Spacy",
+      "OpenCV",
+      "BeautifulSoup",
+      "Streamlit",
+      "Plotly",
+      "Transformers"
+    ],
+    "databases": [
+      "MySQL",
+      "PostgreSQL",
+      "ChromaDB"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "VS Code",
+      "Jupyter Notebook",
+      "Google Colab",
+      "Tableau",
+      "Power BI",
+      "Excel"
+    ]
   },
   "projects": [
     {
@@ -127,9 +179,9 @@
       "description": "Cold email generator using LLMs",
       "url": "https://github.com/Inferno-721/Clod",
       "highlights": [
-        "Automates the creation of personalized cold emails by analyzing job descriptions." , 
+        "Automates the creation of personalized cold emails by analyzing job descriptions.",
         "Extracts key details using GROQ, matches relevance with Chroma DB, and generates drafts with Llama 3.1. ",
-        "Allows customization of tone and content to align with different job applications.",  
+        "Allows customization of tone and content to align with different job applications.",
         "Simplifies the job application process by requiring only a job description link."
       ],
       "technologies": [
@@ -149,7 +201,12 @@
         "Utilized MultiModal LLM Google Gemini for genrating response from screenshots, ensuring scalability and optimal performance",
         "Implemented robust features, including step-by-step instructions, image recognition, and text generation"
       ],
-      "technologies": ["React", "Tailwind CSS", "Gemini", "Git"]
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Gemini",
+        "Git"
+      ]
     },
     {
       "name": "NL2SQL",
@@ -160,8 +217,12 @@
         "Implemented a user-friendly interface for seamless interaction",
         "Utilized advanced NLP techniques to ensure accurate query generation"
       ],
-      "technologies": ["Python", "Streamlit", "Llamaindex", "Llama 3.1"]
-  
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "Llamaindex",
+        "Llama 3.1"
+      ]
     }
   ]
 }
