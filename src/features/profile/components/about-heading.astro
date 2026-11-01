@@ -1,0 +1,33 @@
+---
+import { basics } from "@cv";
+import ActionLink from "@/shared/ui/action-link.astro";
+import PageHeading from "@/shared/ui/page-heading.astro";
+import { SITE } from "@/shared/site";
+import LogoOrbit from "./logo-orbit.astro";
+
+const elsewhere = basics.socials.filter(({ network }) => network !== "email");
+---
+
+<PageHeading title="About">
+  {basics.bio.map((paragraph) => <p>{paragraph}</p>)}
+  <div class="flex flex-wrap gap-3 pt-3">
+    <ActionLink
+      href={SITE.resumeHref}
+      download={SITE.resumeFilename}
+      icon="file-down"
+      variant="primary"
+    >
+      Download résumé
+    </ActionLink>
+    {
+      elsewhere.map(({ network, label, url }) => (
+        <ActionLink href={url} icon={network} newTab>
+          {label}
+        </ActionLink>
+      ))
+    }
+  </div>
+  <div slot="aside" class="rise" style="--i: 2">
+    <LogoOrbit size="lg" />
+  </div>
+</PageHeading>

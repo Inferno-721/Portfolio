@@ -1,0 +1,54 @@
+---
+import { basics } from "@cv";
+import { Icon } from "astro-icon/components";
+import ActionLink from "@/shared/ui/action-link.astro";
+import { SITE } from "@/shared/site";
+
+const email = basics.socials.find(({ network }) => network === "email");
+const elsewhere = basics.socials.filter(({ network }) => network !== "email");
+---
+
+<section
+  class="wrap py-16 lg:py-24"
+  aria-labelledby="contact-heading"
+  data-reveal
+>
+  <h2 id="contact-heading" class="font-mono text-xs text-muted">
+    Get in touch
+  </h2>
+  {
+    email && (
+      <a
+        href={email.url}
+        class="group mt-4 inline-flex max-w-full items-center gap-3 font-display text-xl font-semibold sm:text-2xl md:text-3xl"
+      >
+        <span class="heat-text min-w-0 break-words" data-heat>
+          {email.handle}
+        </span>
+        <Icon
+          name="arrow-up-right"
+          class="nudge shrink-0 text-primary"
+          size={28}
+          aria-hidden="true"
+        />
+      </a>
+    )
+  }
+  <div class="mt-6 flex flex-wrap gap-3">
+    <ActionLink
+      href={SITE.resumeHref}
+      download={SITE.resumeFilename}
+      icon="file-down"
+      variant="primary"
+    >
+      Download résumé
+    </ActionLink>
+    {
+      elsewhere.map(({ network, label, url }) => (
+        <ActionLink href={url} icon={network} newTab>
+          {label}
+        </ActionLink>
+      ))
+    }
+  </div>
+</section>

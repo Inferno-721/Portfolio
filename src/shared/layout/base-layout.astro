@@ -1,0 +1,33 @@
+---
+import "@/shared/styles/global.css";
+import BaseHead from "./base-head.astro";
+import SiteFooter from "./site-footer.astro";
+import SiteHeader from "./site-header.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <canvas id="pointer-field" class="field" aria-hidden="true"></canvas>
+    <a href="#main" class="skip-link text-sm">Skip to content</a>
+    <SiteHeader />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <slot name="overlay" />
+    <script>
+      import "@/shared/effects/boot";
+    </script>
+  </body>
+</html>

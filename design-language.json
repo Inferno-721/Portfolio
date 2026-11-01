@@ -1,0 +1,195 @@
+{
+  "$comment": "Decision record for this site's design. src/shared/styles/tokens.css is the wired copy and tests/design-language.test.ts fails if the two drift or a text pairing drops below WCAG AA.",
+  "brand": "Shubham Joshi (Inferno)",
+  "source": {
+    "url": null,
+    "captured": "2026-11-01",
+    "method": "decided (no reference). A personal site with no existing brand. Direction: dark-first, a still dot field behind glass panels, where things respond to the cursor and otherwise stay quiet."
+  },
+  "color": {
+    "primary": "#CF2F12",
+    "primaryHover": "#B32509",
+    "primaryText": "#FFFFFF",
+    "secondary": "#6E6963",
+    "accent": "#CF2F12",
+    "neutral": {
+      "50": "#F6F5F2",
+      "100": "#ECEAE6",
+      "200": "#DBD8D2",
+      "300": "#BDB9B2",
+      "400": "#A39E97",
+      "500": "#6E6963",
+      "700": "#3A3733",
+      "800": "#1F1D1B",
+      "900": "#121110"
+    },
+    "role": {
+      "text": "#171614",
+      "textMuted": "#6E6963",
+      "surface": "#F6F5F2",
+      "surfaceRaised": "#ECEAE6",
+      "border": "#DBD8D2",
+      "borderStrong": "#BDB9B2"
+    },
+    "semantic": {
+      "success": "#1C7A48",
+      "warning": "#8F6100",
+      "danger": "#A61E17",
+      "info": "#2B6CB0"
+    },
+    "dark": {
+      "primary": "#FF6B45",
+      "primaryHover": "#FF8A6B",
+      "primaryText": "#170A06",
+      "role": {
+        "text": "#EFEDE9",
+        "textMuted": "#A39E97",
+        "surface": "#121110",
+        "surfaceRaised": "#1F1D1B",
+        "border": "#2C2A27",
+        "borderStrong": "#3A3733"
+      },
+      "semantic": {
+        "success": "#4CC38A",
+        "warning": "#E0A93B",
+        "danger": "#F2867E",
+        "info": "#7FB2E5"
+      }
+    }
+  },
+  "type": {
+    "fontBody": "Inter Variable",
+    "fontHeading": "Bricolage Grotesque Variable",
+    "fontMono": "JetBrains Mono Variable",
+    "scale": {
+      "xs": {
+        "size": "0.75rem",
+        "lineHeight": "1.125rem",
+        "tracking": "0"
+      },
+      "sm": {
+        "size": "0.875rem",
+        "lineHeight": "1.375rem",
+        "tracking": "0"
+      },
+      "base": {
+        "size": "1rem",
+        "lineHeight": "1.625rem",
+        "tracking": "0"
+      },
+      "lg": {
+        "size": "1.1875rem",
+        "lineHeight": "1.75rem",
+        "tracking": "0"
+      },
+      "xl": {
+        "size": "1.375rem",
+        "lineHeight": "1.75rem",
+        "tracking": "0"
+      },
+      "2xl": {
+        "size": "1.875rem",
+        "lineHeight": "2.25rem",
+        "tracking": "0"
+      },
+      "3xl": {
+        "size": "2.75rem",
+        "lineHeight": "1",
+        "tracking": "0"
+      },
+      "display": {
+        "size": "clamp(3.5rem, 8.5vw, 7.5rem)",
+        "lineHeight": "0.92",
+        "tracking": "-0.035em"
+      }
+    },
+    "weights": {
+      "body": 400,
+      "medium": 500,
+      "bold": 600
+    }
+  },
+  "space": {
+    "base": "4px",
+    "steps": {
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "6": "24px",
+      "8": "32px",
+      "12": "48px",
+      "16": "64px",
+      "24": "96px"
+    }
+  },
+  "shape": {
+    "radius": "4px",
+    "radiusLarge": "8px",
+    "borderWidth": "1px"
+  },
+  "elevation": {
+    "none": "none",
+    "1": "glass: surface at 78% over the field",
+    "2": "glass-strong: surface at 84% with an 18px backdrop blur"
+  },
+  "motion": {
+    "duration": {
+      "fast": "150ms",
+      "base": "200ms",
+      "slow": "320ms",
+      "reveal": "700ms"
+    },
+    "easing": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "field": {
+      "restAlpha": {
+        "light": 0.34,
+        "dark": 0.26
+      },
+      "idleBehaviour": "fully still, render loop stopped"
+    }
+  },
+  "components": {
+    "button": {
+      "height": "40px",
+      "paddingInline": "16px",
+      "fontSize": "0.875rem",
+      "fontWeight": 500,
+      "textTransform": "none",
+      "tracking": "0",
+      "radius": "4px",
+      "shadow": "none",
+      "hover": "pulled toward the cursor; background moves one step",
+      "disabled": "not used: the site has no disabled controls"
+    },
+    "input": {
+      "height": "40px",
+      "paddingInline": "12px",
+      "fontSize": "0.875rem",
+      "borderColor": "borderStrong",
+      "radius": "4px",
+      "focusRing": "2px primary, 2px offset",
+      "errorBorder": "danger",
+      "placeholderColor": "textMuted"
+    },
+    "card": {
+      "padding": "24px",
+      "radius": "8px",
+      "borderColor": "text at 12%, lit by a cursor-following primary glow",
+      "shadow": "none",
+      "headerTreatment": "display font, no rule below",
+      "surface": "glass"
+    }
+  },
+  "notes": [
+    "Dark is the default; light is one toggle away.",
+    "The background is a still lattice. It reacts only near the cursor and settles within about a second. Nothing moves on its own, and the render loop stops when idle.",
+    "Every card on the site is crumpled paper with a visible texture at rest. It wrinkles and catches light under the cursor, with a glow around its border. Most cards tilt toward the cursor, long ones only slightly, and the agent console doesn't tilt.",
+    "Project cards also flip on click to a liquid glass back, with full details in a lightbox that morphs from the card.",
+    "The header and favicon use a clean vector infinity mark. The boy-in-a-hat drawing is the personal identity, large in the home hero and on About, as transparent line art that matches the theme with no disc behind it.",
+    "The name and contact email pick up the accent colour around the cursor. Other large headings use a soft vertical gradient.",
+    "Tech stacks and skills are chips. Sentence case everywhere.",
+    "Interaction motion stays fast (150-240ms); scroll entrances may take 700ms. prefers-reduced-motion leaves the field still and removes the rest.",
+    "Only backdrop-blur the console and header, because blur is costly when anything behind it repaints."
+  ]
+}

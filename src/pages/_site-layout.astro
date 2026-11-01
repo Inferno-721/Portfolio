@@ -1,0 +1,14 @@
+---
+import { AgentDock } from "@/features/agent";
+import BaseLayout from "@/shared/layout/base-layout.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+---
+
+<BaseLayout {...Astro.props}>
+  <slot />
+  <AgentDock slot="overlay" />
+</BaseLayout>

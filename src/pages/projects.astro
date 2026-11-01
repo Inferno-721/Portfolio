@@ -1,26 +1,19 @@
 ---
-import Card from "@/components/Card.astro";
-import Heading from "@/components/Heading.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { SITE } from "@/consts";
-import { projects } from "@cv";
+import { ContactBand } from "@/features/profile";
+import { ProjectList } from "@/features/projects";
+import SiteLayout from "./_site-layout.astro";
+import PageHeading from "@/shared/ui/page-heading.astro";
 ---
 
-<BaseLayout title="Projects" description={SITE.DESCRIPTION}>
-  <div class="container mx-auto my-24 xl:my-5">
-    <Heading title="My Projects" />
-    <div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
-      {
-        projects.map(({ url, name, description, highlights, technologies }) => (
-          <Card
-            url={url}
-            description={description}
-            highlights={highlights}
-            name={name}
-            technologies={technologies}
-          />
-        ))
-      }
-    </div>
-  </div>
-</BaseLayout>
+<SiteLayout
+  title="Projects"
+  description="Agent, RAG and LLM projects built by Shubham Joshi, including an MCP server in Go and a multi-agent contract risk system."
+>
+  <PageHeading title="Projects">
+    <p>Agents, RAG and LLM tooling, most relevant first.</p>
+  </PageHeading>
+  <section class="wrap py-6" aria-label="All projects">
+    <ProjectList />
+  </section>
+  <ContactBand />
+</SiteLayout>

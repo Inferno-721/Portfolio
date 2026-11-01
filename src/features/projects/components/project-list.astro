@@ -1,0 +1,32 @@
+---
+import { projects } from "@cv";
+import ProjectCard from "./project-card.astro";
+import ProjectLightbox from "./project-lightbox.astro";
+
+type Props = {
+  variant?: "featured" | "full";
+};
+
+const { variant = "full" } = Astro.props;
+const isFull = variant === "full";
+const items = isFull ? projects : projects.filter(({ featured }) => featured);
+---
+
+<div data-project-gallery>
+  <ul class:list={["grid gap-4 md:grid-cols-2", isFull && "xl:grid-cols-3"]}>
+    {
+      items.map((project, index) => (
+        <li data-reveal style={`--i: ${index % 3}`}>
+          <ProjectCard project={project} index={index} />
+        </li>
+      ))
+    }
+  </ul>
+  <ProjectLightbox items={items} />
+</div>
+
+<script>
+  import { startProjectGallery } from "../client/project-gallery.ts";
+
+  startProjectGallery();
+</script>

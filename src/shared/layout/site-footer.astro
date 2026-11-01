@@ -1,0 +1,20 @@
+---
+import { SITE } from "@/shared/site";
+---
+
+<footer class="wrap">
+  <div
+    class="flex flex-col gap-1 border-t py-6 font-mono text-xs text-muted sm:flex-row sm:justify-between"
+  >
+    <p>&copy; {new Date().getFullYear()} {SITE.name}</p>
+    <p>
+      Built with Astro. Based on{" "}
+      <a
+        class="underline underline-offset-2 hover:text-ink"
+        href="https://github.com/MAX-786"
+        target="_blank"
+        rel="noopener noreferrer">MAX-786's template</a
+      >.
+    </p>
+  </div>
+</footer>

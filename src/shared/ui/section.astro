@@ -1,0 +1,32 @@
+---
+type Props = {
+  title: string;
+  lede?: string;
+  moreHref?: string;
+  moreLabel?: string;
+};
+
+const { title, lede, moreHref, moreLabel } = Astro.props;
+---
+
+<section class="wrap py-12 lg:py-16">
+  <div class="mb-8 flex items-end justify-between gap-6" data-reveal>
+    <div class="min-w-0">
+      <h2 class="text-gradient font-display text-2xl font-semibold md:text-3xl">
+        {title}
+      </h2>
+      {lede && <p class="mt-3 max-w-measure text-muted">{lede}</p>}
+    </div>
+    {
+      moreHref && (
+        <a
+          href={moreHref}
+          class="press shrink-0 font-mono text-xs text-muted underline underline-offset-4 hover:text-ink"
+        >
+          {moreLabel}
+        </a>
+      )
+    }
+  </div>
+  <slot />
+</section>

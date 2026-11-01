@@ -1,0 +1,96 @@
+---
+import { Icon } from "astro-icon/components";
+
+type Props = {
+  headingId: string;
+};
+
+const { headingId } = Astro.props;
+
+const suggestions = [
+  "What has Shubham built with AI agents?",
+  "How does Shubham use evals?",
+  "What has Shubham written about harness engineering?",
+  "How do I contact Shubham?",
+];
+---
+
+<div data-agent-console>
+  <header class="flex items-center justify-between gap-3">
+    <h2 id={headingId} class="font-display text-xl font-semibold">Ask my AI</h2>
+    <div class="flex items-center gap-3">
+      <p class="flex items-center gap-2 font-mono text-xs text-muted">
+        <span class="ember-dot" aria-hidden="true"></span>
+        <span data-agent-status>Live agent</span>
+      </p>
+      <slot name="actions" />
+    </div>
+  </header>
+
+  <ol data-agent-rail class="agent-rail mt-4" aria-label="Agent progress">
+    <li data-stage="gate">Gate</li>
+    <li data-stage="model">Model</li>
+    <li data-stage="tool">Tools</li>
+    <li data-stage="answer">Answer</li>
+  </ol>
+
+  <div data-agent-answer class="agent-answer mt-4" aria-live="polite">
+    Hi, I'm an AI agent Shubham built and runs on this site. Ask me about
+    Shubham's work. You'll see every step I take as I look things up.
+  </div>
+
+  <ul data-agent-sources class="mt-3 flex flex-wrap gap-2" hidden></ul>
+
+  <ol
+    data-agent-log
+    class="agent-log mt-3 space-y-1 font-mono text-xs text-muted"
+    aria-label="Agent trace"
+    hidden
+  >
+  </ol>
+
+  <ul data-agent-suggestions class="mt-4 flex flex-wrap gap-2">
+    {
+      suggestions.map((suggestion) => (
+        <li>
+          <button type="button" class="chip press" data-suggestion={suggestion}>
+            {suggestion}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <form data-agent-form class="mt-4 flex gap-2">
+    <label class="min-w-0 flex-1">
+      <span class="sr-only">Ask a question about Shubham's work</span>
+      <input
+        data-agent-input
+        class="agent-input"
+        type="text"
+        maxlength="500"
+        autocomplete="off"
+        placeholder="Ask about agents, RAG, projects..."
+      />
+    </label>
+    <button
+      type="submit"
+      class="flex h-control w-control shrink-0 items-center justify-center rounded-full bg-primary text-primary-text hover:bg-primary-hover"
+      aria-label="Send question"
+      data-magnetic
+    >
+      <Icon name="arrow-up-right" size={18} aria-hidden="true" />
+    </button>
+  </form>
+
+  <p data-agent-meta class="mt-3 min-h-4 font-mono text-xs text-muted"></p>
+  <p class="mt-1 text-xs text-muted">
+    Questions are sent to Google Gemini, so please don't share anything private.
+  </p>
+</div>
+
+<script>
+  import { startAgentConsoles } from "../client/agent-console.ts";
+
+  startAgentConsoles();
+</script>

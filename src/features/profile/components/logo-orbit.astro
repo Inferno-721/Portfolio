@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import logo from "@/shared/assets/boy-with-hat.png";
+
+type Props = {
+  size: "sm" | "lg";
+};
+
+const { size } = Astro.props;
+---
+
+<div class:list={["orbit", size === "sm" ? "orbit-sm" : "orbit-lg"]}>
+  <svg class="orbit-ring" viewBox="0 0 506 506" aria-hidden="true">
+    <circle cx="253" cy="253" r="250"></circle>
+  </svg>
+  <Image
+    src={logo}
+    width={size === "sm" ? 240 : 640}
+    loading="eager"
+    alt="Shubham's logo: a boy wearing a straw hat"
+    class="orbit-image line-art"
+  />
+</div>

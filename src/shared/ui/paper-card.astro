@@ -1,0 +1,23 @@
+---
+type Props = {
+  seed: number;
+  /** Long cards use a subtle tilt so their text stays comfortable to read. */
+  tilt?: "full" | "subtle";
+  /** Drops the inner padding, for cards whose content runs edge to edge. */
+  flush?: boolean;
+};
+
+const { seed, tilt = "full", flush = false } = Astro.props;
+---
+
+<div
+  class="glass group h-full"
+  data-paper-host
+  data-spotlight
+  data-tilt={tilt === "subtle" ? "subtle" : ""}
+>
+  <canvas class="paper" data-paper data-seed={seed} aria-hidden="true"></canvas>
+  <div class:list={["relative", !flush && "p-4 md:p-6"]}>
+    <slot />
+  </div>
+</div>

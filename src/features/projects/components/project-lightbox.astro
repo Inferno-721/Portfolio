@@ -1,0 +1,102 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Project } from "../types.ts";
+
+type Props = {
+  items: Project[];
+};
+
+const { items } = Astro.props;
+const controlClass =
+  "press flex h-control w-control items-center justify-center rounded-full text-muted hover:bg-raised hover:text-ink";
+---
+
+<dialog class="lightbox" data-lightbox aria-label="Project details">
+  <div class="lightbox-panel glass glass-strong" data-lightbox-panel>
+    <div
+      class="glass-strong sticky top-0 z-10 flex items-center justify-between gap-3 border-b px-4 py-2 md:px-6"
+    >
+      <p class="font-mono text-xs text-muted" data-lightbox-counter></p>
+      <div class="flex items-center gap-1">
+        <button
+          type="button"
+          class={controlClass}
+          data-lightbox-prev
+          aria-label="Previous project"
+        >
+          <Icon name="chevron-left" size={18} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          class={controlClass}
+          data-lightbox-next
+          aria-label="Next project"
+        >
+          <Icon name="chevron-right" size={18} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          class={controlClass}
+          data-lightbox-close
+          aria-label="Close"
+        >
+          <Icon name="x" size={18} aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+
+    {
+      items.map(({ name, url, note, description, highlights, stack, flow }) => (
+        <article
+          class="lightbox-item grid gap-8 p-4 md:p-8 lg:grid-cols-12"
+          data-lightbox-item={name}
+          hidden
+        >
+          <div class="lg:col-span-7">
+            {note && <p class="font-mono text-xs text-primary">{note}</p>}
+            <h2 class="mt-2 font-display text-2xl font-semibold md:text-3xl">
+              {name}
+            </h2>
+            <p class="mt-4 text-lg">{description}</p>
+            <ul class="mt-6 list-disc space-y-2 pl-4 text-muted">
+              {highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+            <ul class="mt-6 flex flex-wrap gap-2">
+              {stack.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+            {url && (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="press group mt-6 inline-flex h-control items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-text hover:bg-primary-hover"
+              >
+                View the code
+                <Icon
+                  name="arrow-up-right"
+                  class="nudge"
+                  size={16}
+                  aria-hidden="true"
+                />
+              </a>
+            )}
+          </div>
+          <div class="lg:col-span-5">
+            <h3 class="font-display text-lg font-semibold">How it works</h3>
+            <ol class="mt-4">
+              {flow.map((step, stepIndex) => (
+                <li class="flow-step text-sm" data-step={stepIndex + 1}>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</dialog>

@@ -1,0 +1,18 @@
+---
+import { principles } from "@cv";
+import PaperCard from "@/shared/ui/paper-card.astro";
+---
+
+<ol class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  {
+    principles.map(({ title, text }, index) => (
+      <li data-reveal style={`--i: ${index % 3}`}>
+        <PaperCard seed={index + 21}>
+          <p class="font-mono text-xs text-primary">0{index + 1}</p>
+          <h3 class="mt-2 font-display text-lg font-semibold">{title}</h3>
+          <p class="mt-2 text-sm text-muted">{text}</p>
+        </PaperCard>
+      </li>
+    ))
+  }
+</ol>

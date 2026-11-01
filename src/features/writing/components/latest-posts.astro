@@ -1,0 +1,30 @@
+---
+import data from "../data/posts.json";
+import type { Post } from "../types.ts";
+import FollowCard from "./follow-card.astro";
+import PostCard from "./post-card.astro";
+
+const LATEST_COUNT = 3;
+const posts = data as Post[];
+const linkedin = posts.filter(({ source }) => source === "linkedin");
+const blog = posts.filter(({ source }) => source === "blog");
+
+// Two from LinkedIn and one article, so both places stay visible on the home page.
+const picked = [...linkedin.slice(0, 2), ...blog.slice(0, 1)];
+const latest =
+  picked.length === LATEST_COUNT ? picked : posts.slice(0, LATEST_COUNT);
+---
+
+{
+  latest.length > 0 ? (
+    <ul class="grid gap-4 md:grid-cols-3">
+      {latest.map((post, index) => (
+        <li data-reveal style={`--i: ${index}`}>
+          <PostCard post={post} seed={index + 101} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <FollowCard />
+  )
+}

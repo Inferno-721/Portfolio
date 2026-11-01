@@ -1,0 +1,19 @@
+---
+import PaperCard from "@/shared/ui/paper-card.astro";
+import ChannelLinks from "./channel-links.astro";
+---
+
+<div data-reveal>
+  <PaperCard seed={96} tilt="subtle">
+    <h3 class="font-display text-xl font-semibold">
+      Read my posts and articles
+    </h3>
+    <p class="mt-2 max-w-measure text-muted">
+      New posts and articles will appear here automatically. For now, you can
+      find them here:
+    </p>
+    <div class="mt-6">
+      <ChannelLinks highlightFirst />
+    </div>
+  </PaperCard>
+</div>

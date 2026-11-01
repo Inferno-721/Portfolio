@@ -1,0 +1,104 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Project } from "../types.ts";
+
+type Props = {
+  project: Project;
+  index: number;
+};
+
+const { project, index } = Astro.props;
+const { name, url, note, description, flow, stack } = project;
+---
+
+<article
+  class="flip-card group"
+  data-flip-card
+  data-paper-host
+  data-spotlight
+  data-tilt
+>
+  <div class="flip-face flip-front" data-face="front">
+    <canvas class="paper" data-paper data-seed={index + 1} aria-hidden="true"
+    ></canvas>
+    <div class="relative flex h-full flex-col gap-4 p-4 md:p-6">
+      <div class="flex items-center justify-between gap-3 font-mono text-xs">
+        <span class="text-primary">{note ?? "Project"}</span>
+        <span class="flex shrink-0 items-center gap-1 text-muted">
+          <Icon name="flip" size={14} aria-hidden="true" />
+          Flip
+        </span>
+      </div>
+      <h3 class="font-display text-2xl font-semibold">{name}</h3>
+      <ol
+        class="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-6 font-mono text-xs text-muted"
+        aria-label="How it works"
+      >
+        {
+          flow.map((step, stepIndex) => (
+            <li class="flex items-center gap-2">
+              {step}
+              {stepIndex < flow.length - 1 && (
+                <span class="text-primary" aria-hidden="true">
+                  →
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <button
+      type="button"
+      class="flip-toggle"
+      data-flip
+      aria-label={`Flip ${name} card to see more`}></button>
+  </div>
+
+  <div class="flip-face flip-back liquid-glass" data-face="back">
+    <div class="relative flex h-full flex-col gap-3 p-4 md:p-6">
+      <div class="flex items-start justify-between gap-3">
+        <h3 class="font-display text-xl font-semibold">{name}</h3>
+        <button
+          type="button"
+          class="press flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted hover:text-ink"
+          data-flip
+          aria-label={`Flip ${name} card back`}
+        >
+          <Icon name="flip" size={16} aria-hidden="true" />
+        </button>
+      </div>
+      <p class="text-sm">{description}</p>
+      <ul class="flex flex-wrap gap-2">
+        {stack.map((item) => <li class="chip">{item}</li>)}
+      </ul>
+      <div class="mt-auto flex flex-wrap gap-2 pt-3">
+        <button
+          type="button"
+          class="press inline-flex h-control items-center rounded-full bg-primary px-4 text-sm font-medium text-primary-text hover:bg-primary-hover"
+          data-open-lightbox={index}
+        >
+          Full details
+        </button>
+        {
+          url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="press glass inline-flex h-control items-center gap-2 rounded-full px-4 text-sm font-medium hover:bg-raised"
+            >
+              Code
+              <Icon
+                name="arrow-up-right"
+                class="nudge"
+                size={16}
+                aria-hidden="true"
+              />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</article>

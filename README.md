@@ -1,123 +1,96 @@
-# MAX-786's Personal Website
+# Shubham Joshi: portfolio
 
-This is the source code for my personal website, built using [Astro](https://astro.build/). Visit the live site at [mkhismkh.com](https://mkhismkh.com).
+Source for [inferno-721.vercel.app](https://inferno-721.vercel.app). An [Astro](https://astro.build/) site with a cursor-reactive dot field behind it, a real AI agent you can talk to, and a Writing page fed by LinkedIn and blog posts.
 
-## Features
+## Run it
 
-- **Portfolio Showcase** - Display projects, skills, and experience in a clean, modern interface
-- **Digital Garden** - A knowledge management system for sharing ideas, solutions, and learnings
-  - Tree/Leaf structure for organizing content
-  - Growth stages to indicate content maturity
-- **Authentication** - Secure admin access for content management using Clerk
-- **Database Integration** - Content stored in Supabase
-- **Responsive Design** - Works seamlessly on all devices
-- **Dark/Light Mode** - Automatic theme switching based on user preference
-- **Interactive UI** - Animations and particle effects
+```bash
+pnpm install
+cp .env.example .env
+pnpm dev
+```
 
-## Stack
+| Command                 | What it does                                              |
+| ----------------------- | --------------------------------------------------------- |
+| `pnpm dev`              | Dev server on `localhost:4321`                            |
+| `pnpm build`            | Type-checks, then builds for Vercel                       |
+| `pnpm test`             | Agent loop, endpoint, sync parsers, WCAG contrast, tokens |
+| `pnpm eval`             | Offline agent evals: routing and retrieval, no model      |
+| `pnpm eval:live`        | Every eval case against the real model. Uses free quota   |
+| `pnpm posts:sync`       | Fetch new posts from LinkedIn and RSS feeds               |
+| `pnpm posts:import <f>` | Load `Shares.csv` from LinkedIn's data export             |
 
-This project uses the following technologies:
+## Environment
 
-- [Astro](https://astro.build/) - The web framework for content-driven websites
-- [React](https://react.dev/) - For interactive UI components
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [Supabase](https://supabase.com/) - Open source Firebase alternative
-- [Clerk](https://clerk.com/) - Authentication and user management
+| Variable            | Where                 | Purpose                                                                               |
+| ------------------- | --------------------- | ------------------------------------------------------------------------------------- |
+| `GEMINI_API_KEY`    | Vercel                | Powers the agent on Gemini's free tier. Without a model key, answers come from search |
+| `ANTHROPIC_API_KEY` | Vercel, optional      | Used only if `GEMINI_API_KEY` is not set                                              |
+| `AGENT_MODEL`       | Vercel, optional      | Defaults to `gemini-3.5-flash-lite`                                                   |
+| `APIFY_TOKEN`       | GitHub Actions secret | Daily LinkedIn sync                                                                   |
 
-## Developer Setup
+On the free tier, going over Gemini's limits simply switches answers to search until the quota resets at midnight Pacific. The in-app rate limit lives in serverless memory, so it only stops casual abuse.
 
-### Prerequisites
+## The AI agent
 
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [pnpm](https://pnpm.io/) (recommended) or npm/yarn
-- [Git](https://git-scm.com/)
+Code in `src/features/agent`. The endpoint is `POST /api/agent`, streaming server-sent events.
 
-### Getting Started
+```
+question → deterministic gate → streaming tool-use loop (max 3 turns) → grounded answer
+                  │                         │
+                  └ fixed answers, no LLM   └ any failure → BM25 search answer
+```
 
-1. Clone the repository:
+- **Tool selection:** four read-only tools (`search_profile`, `list_projects`, `get_experience`, `search_posts`). They can't change anything, which limits what prompt injection can do.
+- **State and memory:** the server is stateless. The browser keeps the last 6 turns in `sessionStorage`, so the chat follows the visitor across pages and ends with the tab.
+- **Failure recovery:** SDK retries, then a fallback to search. Refusals show a short decline. Truncated tool calls never run. The loop's last turn is forced to answer.
+- **Observability:** the console shows every real step. Each request logs one JSON line with mode, tools, tokens and latency. Visitors' questions and IP addresses are not logged.
+- **Chunking and metadata:** each role highlight, project, skill group and post is one chunk, tagged with kind, title, URL and date.
+- **Retrieval:** BM25 over a few dozen chunks. Embeddings and a vector database would add cost and failure modes without improving recall at this size, so there's no reranker either.
+- **Evaluation:** `evals/cases.json` has deterministic pass/fail cases. The score on the home page is read from the last run's output, so it can't claim more than was measured.
+- **Cost:** Gemini's free tier, a 2,048 token cap per model turn, and the fast path that skips the model. `AGENT_MODEL` switches model without a code change.
 
-   ```bash
-   git clone https://github.com/MAX-786/mkhismkh.git
-   cd mkhismkh
-   ```
+## The post sync
 
-2. Install dependencies:
+LinkedIn closed the API permission for reading a member's own posts (`r_member_social`) to new applicants, so there's no official live connection. Sources are pluggable instead, and all end up as one `Post` shape in `src/features/writing/data/posts.json`:
 
-   ```bash
-   pnpm install
-   ```
+- **LinkedIn via Apify** (`APIFY_TOKEN`): `harvestapi/linkedin-profile-posts` reads public posts with no LinkedIn login. It's a third-party scraper, so check you're comfortable with LinkedIn's terms.
+- **LinkedIn data export** (`pnpm posts:import Shares.csv`): official and free, but manual.
+- **Blogs via RSS** (`rssFeeds` in `feed.config.json`): Medium, Substack, Hashnode, dev.to or any RSS or Atom feed.
 
-3. Set up environment variables:
-   Create a `.env` file in the root directory with the following variables:
+`.github/workflows/sync-posts.yml` runs every 6 hours and commits changes, which triggers a Vercel deploy, so a new post appears within about 6 hours. Medium needs no setup. LinkedIn needs the `APIFY_TOKEN` secret. For a quicker refresh, run the workflow by hand from GitHub's Actions tab. A failing source keeps the saved posts, so an outage can't empty the page the way the old garden broke. For the first run, use `pnpm posts:sync --all` to pull the full history.
 
-   ```
-   # Supabase
-   SUPABASE_URL=your_supabase_url
-   SUPABASE_KEY=your_supabase_anon_key
+## Update the content
 
-   # Clerk
-   PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-   CLERK_SECRET_KEY=your_clerk_secret_key
-   ADMIN_USER_IDs=comma_separated_admin_user_ids
-   ```
+Almost everything comes from **`cv.json`**, including the About story (`basics.bio`), the engineering principles (`principles`) and each project's pipeline (`flow`). To show Medium, add a `medium` entry to `basics.socials` and the feed URL to `rssFeeds` in `feed.config.json`, then run `pnpm posts:sync`. **`public/Shubham_Joshi_Resume.pdf`** is the file behind the Résumé buttons.
 
-4. Start the development server:
-   ```bash
-   pnpm dev
-   ```
+## Change the design
 
-### Supabase Setup
+- **`design-language.json`**: the record of each design decision.
+- **`src/shared/styles/tokens.css`**: the wired copy, as CSS variables.
+- **`tailwind.config.mjs`**: replaces Tailwind's default scales with those variables, so off-scale classes don't exist.
+- **`src/features/projects/client`**: the project card effects. `liquid-glass.ts` builds the refraction filter for the card backs (Chromium; other browsers get a frosted blur), and `project-gallery.ts` runs the flip and the lightbox, which morphs from the card using the View Transitions API.
+- **`src/shared/effects`**: the canvas dot field, the WebGL crumpled paper used by project and About cards (`shared/ui/paper-card.astro`), and cursor effects, driven by `data-spotlight`, `data-tilt`, `data-magnetic`, `data-heat`, `data-reveal` and `data-count`. All of it respects `prefers-reduced-motion`.
 
-1. Create a new Supabase project at [supabase.com](https://supabase.com)
-2. Set up the following tables:
-   - `trees` - For garden tree structure
-   - `leaves` - For garden leaf content
-   - `leaf_references` - For references between leaves
-   - `growth_stages` - For metadata about content maturity
-3. Copy your project URL and anon key to the `.env` file
+## Structure
 
-### Clerk Setup
+Imports only flow one way: `pages → features → shared`. Other code imports a feature through its `index.ts` only.
 
-1. Create a new Clerk application at [clerk.com](https://clerk.com)
-2. Configure authentication methods (email, social logins, etc.)
-3. Copy your publishable key and secret key to the `.env` file
-4. Add admin user IDs to the `ADMIN_USER_IDs` environment variable
+```
+src/
+  pages/      routes, wiring only
+  features/
+    agent/        the AI agent: console, endpoint logic, tools, retrieval
+    writing/      posts page and the sync sources
+    profile/      hero, metrics, contact
+    experience/   timeline and summary
+    projects/     project list
+    credentials/  skills, achievements, education
+  shared/     layout, UI primitives, effects, tokens. Knows nothing about the CV
+evals/        agent eval cases and runner
+scripts/      post sync CLI
+```
 
-### Deployment
+## Credits
 
-This project is configured for deployment on Vercel:
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Configure environment variables in the Vercel dashboard
-4. Deploy!
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-| `pnpm format`          | Format code with Prettier                        |
-
-## Update CHANGELOG
-
-### Types of changes
-
-- `Added` for new features.
-- `Changed` for changes in existing functionality.
-- `Deprecated` for soon-to-be removed features.
-- `Removed` for now removed features.
-- `Fixed` for any bug fixes.
-- `Security` in case of vulnerabilities.
-
-## License
-
-MIT License - Feel free to use this code as inspiration for your own projects!
+Started as a fork of [MAX-786's personal site](https://github.com/MAX-786) (MIT, see `LICENSE`). Fonts are Bricolage Grotesque, Inter and JetBrains Mono (OFL), self-hosted in `public/fonts`.

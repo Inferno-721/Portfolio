@@ -1,0 +1,19 @@
+---
+import { ContactBand } from "@/features/profile";
+import { PostGrid } from "@/features/writing";
+import SiteLayout from "./_site-layout.astro";
+import PageHeading from "@/shared/ui/page-heading.astro";
+---
+
+<SiteLayout
+  title="Writing"
+  description="LinkedIn posts and Medium articles by Shubham Joshi on AI agents, MCP, evals, RAG and prompting."
+>
+  <PageHeading title="Writing">
+    <p>My LinkedIn posts and Medium articles, all in one place.</p>
+  </PageHeading>
+  <section class="wrap py-6" aria-label="Posts">
+    <PostGrid />
+  </section>
+  <ContactBand />
+</SiteLayout>

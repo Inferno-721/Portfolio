@@ -1,0 +1,107 @@
+/* Wired copy of design-language.json. Components read these through Tailwind. */
+:root {
+  color-scheme: light;
+
+  --primary: #cf2f12;
+  --primary-hover: #b32509;
+  --primary-text: #ffffff;
+
+  --neutral-50: #f6f5f2;
+  --neutral-100: #eceae6;
+  --neutral-200: #dbd8d2;
+  --neutral-300: #bdb9b2;
+  --neutral-400: #a39e97;
+  --neutral-500: #6e6963;
+  --neutral-700: #3a3733;
+  --neutral-800: #1f1d1b;
+  --neutral-900: #121110;
+
+  --text: #171614;
+  --text-muted: var(--neutral-500);
+  --surface: var(--neutral-50);
+  --surface-raised: var(--neutral-100);
+  --border: var(--neutral-200);
+  --border-strong: var(--neutral-300);
+
+  --success: #1c7a48;
+  --warning: #8f6100;
+  --danger: #a61e17;
+  --info: #2b6cb0;
+
+  --heat-core: var(--primary);
+  --field-rest-alpha: 0.34;
+
+  --glass: color-mix(in oklab, var(--surface) 78%, transparent);
+  --glass-strong: color-mix(in oklab, var(--surface) 84%, transparent);
+  --glass-border: color-mix(in oklab, var(--text) 12%, transparent);
+  --glow: color-mix(in oklab, var(--primary) 16%, transparent);
+
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs: 0.75rem;
+  --leading-xs: 1.125rem;
+  --text-sm: 0.875rem;
+  --leading-sm: 1.375rem;
+  --text-base: 1rem;
+  --leading-base: 1.625rem;
+  --text-lg: 1.1875rem;
+  --leading-lg: 1.75rem;
+  --text-xl: 1.375rem;
+  --leading-xl: 1.75rem;
+  --text-2xl: 1.875rem;
+  --leading-2xl: 2.25rem;
+  --text-3xl: 2.75rem;
+  --leading-3xl: 1;
+  --text-display: clamp(3.5rem, 8.5vw, 7.5rem);
+  --leading-display: 0.92;
+  --tracking-display: -0.035em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  --radius: 4px;
+  --radius-lg: 8px;
+  --control-h: 40px;
+  --header-h: 56px;
+  --page-width: 1160px;
+  --measure: 62ch;
+
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --duration-reveal: 700ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --primary: #ff6b45;
+  --primary-hover: #ff8a6b;
+  --primary-text: #170a06;
+
+  --text: #efede9;
+  --text-muted: var(--neutral-400);
+  --surface: var(--neutral-900);
+  --surface-raised: var(--neutral-800);
+  --border: #2c2a27;
+  --border-strong: var(--neutral-700);
+
+  --success: #4cc38a;
+  --warning: #e0a93b;
+  --danger: #f2867e;
+  --info: #7fb2e5;
+
+  --field-rest-alpha: 0.26;
+}

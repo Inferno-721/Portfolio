@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-icon/components";
+import AgentPanel from "./agent-panel.astro";
+---
+
+<div class="agent-dock" data-agent-dock>
+  <div
+    id="agent-dock-panel"
+    class="agent-dock-panel glass glass-strong"
+    role="dialog"
+    aria-labelledby="agent-dock-title"
+    data-agent-dock-panel
+    data-spotlight
+    hidden
+  >
+    <AgentPanel headingId="agent-dock-title">
+      <button
+        slot="actions"
+        type="button"
+        class="press flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted hover:bg-raised hover:text-ink"
+        aria-label="Close"
+        data-agent-dock-close
+      >
+        <Icon name="x" size={16} aria-hidden="true" />
+      </button>
+    </AgentPanel>
+  </div>
+  <button
+    type="button"
+    class="agent-dock-launcher"
+    aria-expanded="false"
+    aria-controls="agent-dock-panel"
+    data-agent-dock-toggle
+    data-magnetic
+  >
+    <Icon name="sparkles" size={18} aria-hidden="true" />
+    Ask my AI
+  </button>
+</div>
+
+<script>
+  import { startAgentDock } from "../client/agent-dock.ts";
+
+  startAgentDock();
+</script>

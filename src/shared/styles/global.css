@@ -1,0 +1,746 @@
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Bricolage Grotesque Variable";
+    src: url("/fonts/bricolage-grotesque-latin-wght-normal.woff2")
+      format("woff2-variations");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter Variable";
+    src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "JetBrains Mono Variable";
+    src: url("/fonts/jetbrains-mono-latin-wght-normal.woff2")
+      format("woff2-variations");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html {
+    background:
+      radial-gradient(
+        70% 45% at 50% 0%,
+        color-mix(in oklab, var(--text) 6%, transparent),
+        transparent
+      ),
+      var(--surface);
+    background-attachment: fixed;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + var(--space-8));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+
+  /* Layout utilities like `flex` would otherwise win over the attribute. */
+  [hidden] {
+    display: none !important;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-page px-4 md:px-8;
+  }
+
+  .field {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: var(--space-2);
+    z-index: 20;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius);
+    background-color: var(--primary);
+    color: var(--primary-text);
+    transform: translateY(-200%);
+  }
+  .skip-link:focus {
+    transform: none;
+  }
+
+  /* Panels. Only the strong variant blurs, because blur over a live canvas is costly. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--glass);
+  }
+  .glass-strong {
+    background-color: var(--glass-strong);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  /* A glow that follows the cursor around the border and across the fill. */
+  [data-spotlight]::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 50%),
+      var(--primary),
+      transparent 72%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: var(--glow-on, 0);
+    pointer-events: none;
+  }
+  [data-spotlight]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      var(--glow),
+      transparent 70%
+    );
+    opacity: var(--glow-on, 0);
+    pointer-events: none;
+  }
+
+  [data-tilt] {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg))
+      rotateY(var(--ry, 0deg));
+    transition: transform 240ms var(--ease-out);
+  }
+
+  [data-magnetic] {
+    transform: translate(var(--tx, 0), var(--ty, 0));
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
+  }
+  [data-magnetic]:active {
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.97);
+  }
+
+  /* Anything pressable: instant feedback on press, colour eases on hover. */
+  .press {
+    transition:
+      transform var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+
+  .nudge {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .nudge {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      180deg,
+      var(--text) 25%,
+      color-mix(in oklab, var(--text) 58%, transparent)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Text that glows hot around the cursor, on top of the soft vertical gradient. */
+  .heat-text {
+    background-image:
+      radial-gradient(
+        circle 15rem at var(--hx, -40rem) var(--hy, -40rem),
+        var(--heat-core),
+        var(--primary) 45%,
+        transparent 76%
+      ),
+      linear-gradient(
+        180deg,
+        var(--text) 35%,
+        color-mix(in oklab, var(--text) 66%, transparent)
+      );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    background-color: color-mix(in oklab, var(--text) 5%, transparent);
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    line-height: var(--leading-xs);
+    transition:
+      color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .chip:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+  }
+
+  .ember-dot {
+    width: var(--space-2);
+    height: var(--space-2);
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background-color: var(--primary);
+    animation: ember-pulse 2.2s ease-in-out infinite;
+  }
+
+  /* Entrances. The hero rises on load; the rest reveal as they scroll into view. */
+  .rise {
+    animation: rise var(--duration-reveal) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+
+  [data-reveal] {
+    transition:
+      opacity var(--duration-reveal) var(--ease-out),
+      transform var(--duration-reveal) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .js [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  /* If the effects script never starts, nothing stays hidden for more than 4s. */
+  .js:not(.fx-ready) [data-reveal]:not(.is-in) {
+    animation: reveal-failsafe 0s linear 4s forwards;
+  }
+
+  /* The logo with the dashed ring from the original site. */
+  .orbit {
+    position: relative;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+  .orbit-sm {
+    width: 7rem;
+  }
+  .orbit-lg {
+    width: clamp(12rem, 26vw, 20rem);
+  }
+  .orbit-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: orbit-spin 28s linear infinite;
+  }
+  .orbit-ring circle {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 15 120 25 25;
+    animation: orbit-dash 16s ease-in-out infinite alternate;
+  }
+  .logo-mark-trace {
+    stroke: var(--primary);
+    stroke-dasharray: 50 50;
+    stroke-dashoffset: -50;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .logo-mark-trace {
+      transition: stroke-dashoffset var(--duration-reveal) var(--ease-out);
+    }
+    .group:hover .logo-mark-trace {
+      stroke-dashoffset: -150;
+    }
+  }
+
+  /* Transparent black line art, flipped to white on the dark theme. */
+  .dark .line-art {
+    filter: invert(1);
+  }
+  .orbit-image {
+    position: absolute;
+    inset: 8%;
+    width: 84%;
+    height: 84%;
+    border-radius: 9999px;
+    object-fit: contain;
+  }
+
+  /* Project cards: paper on the front, liquid glass on the back. */
+  .flip-card {
+    position: relative;
+    isolation: isolate;
+    height: 100%;
+    border-radius: var(--radius-lg);
+  }
+  .flip-face {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    border-radius: inherit;
+  }
+  .flip-front {
+    background-color: var(--surface-raised);
+  }
+  .paper {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .flip-toggle {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    border-radius: inherit;
+    cursor: pointer;
+  }
+  .flip-toggle:focus-visible {
+    outline-offset: -3px;
+  }
+  .liquid-glass {
+    background-color: color-mix(in oklab, var(--surface) 42%, transparent);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, var(--text) 26%, transparent),
+      inset 1px 0 0 color-mix(in oklab, var(--text) 10%, transparent),
+      inset 0 -18px 32px -18px
+        color-mix(in oklab, var(--primary) 26%, transparent);
+  }
+  .js .flip-card {
+    display: grid;
+  }
+  .js .flip-face {
+    grid-area: 1 / 1;
+  }
+  /* Two quarter turns rather than preserve-3d, which would break the backdrop filter. */
+  .js .flip-front {
+    transform: perspective(1200px) rotateY(0deg);
+    transition:
+      transform 240ms var(--ease-out) 170ms,
+      visibility 0s linear 170ms;
+  }
+  .js .flip-back {
+    visibility: hidden;
+    transform: perspective(1200px) rotateY(90deg);
+    transition:
+      transform 170ms cubic-bezier(0.55, 0, 1, 0.45),
+      visibility 0s linear 170ms;
+  }
+  .js .is-flipped .flip-front {
+    visibility: hidden;
+    transform: perspective(1200px) rotateY(-90deg);
+    transition:
+      transform 170ms cubic-bezier(0.55, 0, 1, 0.45),
+      visibility 0s linear 170ms;
+  }
+  .js .is-flipped .flip-back {
+    visibility: visible;
+    transform: perspective(1200px) rotateY(0deg);
+    transition:
+      transform 240ms var(--ease-out) 170ms,
+      visibility 0s linear 170ms;
+  }
+
+  /* Numbered pipeline inside the lightbox. */
+  .flow-step {
+    position: relative;
+    padding-bottom: var(--space-4);
+    padding-left: var(--space-8);
+  }
+  .flow-step::before {
+    content: attr(data-step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: var(--space-6);
+    height: var(--space-6);
+    border: 1px solid var(--primary);
+    border-radius: 9999px;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+  .flow-step::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--space-3) - 0.5px);
+    top: var(--space-6);
+    bottom: 0;
+    width: 1px;
+    background-color: var(--border-strong);
+  }
+  .flow-step:last-child {
+    padding-bottom: 0;
+  }
+  .flow-step:last-child::after {
+    display: none;
+  }
+
+  /* Project lightbox */
+  .lightbox {
+    display: none;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    padding: var(--space-4);
+    border: 0;
+    background: transparent;
+    color: var(--text);
+  }
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+  }
+  .lightbox::backdrop {
+    background-color: color-mix(in oklab, var(--surface) 72%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .lightbox-panel {
+    width: 100%;
+    max-width: 60rem;
+    max-height: calc(100dvh - var(--space-8));
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .lightbox-item {
+    animation: lightbox-in var(--duration-slow) var(--ease-out);
+  }
+  html:has(.lightbox[open]) {
+    overflow: hidden;
+  }
+
+  /* Floating agent, on every page */
+  .agent-dock {
+    position: fixed;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-3);
+    pointer-events: none;
+  }
+  .agent-dock > * {
+    pointer-events: auto;
+  }
+  .agent-dock-panel {
+    width: min(27rem, calc(100vw - var(--space-8)));
+    max-height: calc(100dvh - var(--space-24));
+    padding: var(--space-4);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    transform-origin: bottom right;
+    animation: dock-in var(--duration-base) var(--ease-out);
+  }
+  .agent-dock-launcher {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: var(--control-h);
+    padding-inline: var(--space-4);
+    border-radius: 9999px;
+    background-color: var(--primary);
+    color: var(--primary-text);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 32%, transparent);
+    cursor: pointer;
+    transition:
+      opacity var(--duration-base) ease,
+      transform var(--duration-base) var(--ease-out),
+      background-color var(--duration-fast) ease;
+  }
+  .agent-dock-launcher:hover {
+    background-color: var(--primary-hover);
+  }
+  .agent-dock.is-tucked .agent-dock-launcher {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Agent console */
+  .agent-rail {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .agent-rail li {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: var(--leading-xs);
+    transition: color var(--duration-fast) ease;
+  }
+  .agent-rail li::before {
+    content: "";
+    display: block;
+    height: 3px;
+    margin-bottom: var(--space-2);
+    border-radius: 9999px;
+    background-color: var(--glass-border);
+    transition:
+      background-color var(--duration-base) ease,
+      box-shadow var(--duration-base) ease;
+  }
+  .agent-rail li[data-state="running"] {
+    color: var(--text);
+  }
+  .agent-rail li[data-state="running"]::before {
+    background-color: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+    animation: rail-pulse 1s ease-in-out infinite;
+  }
+  .agent-rail li[data-state="done"] {
+    color: var(--text);
+  }
+  .agent-rail li[data-state="done"]::before {
+    background-color: var(--primary);
+  }
+  .agent-rail li[data-state="skip"] {
+    opacity: 0.45;
+  }
+  .agent-rail li[data-state="error"]::before {
+    background-color: var(--danger);
+  }
+
+  .agent-answer {
+    min-height: 6.5rem;
+    max-height: 15rem;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    scrollbar-width: thin;
+  }
+  .agent-answer[data-streaming="true"]::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background-color: var(--primary);
+    animation: caret 900ms steps(2) infinite;
+  }
+  .agent-log li {
+    animation: log-in var(--duration-base) var(--ease-out);
+  }
+  .agent-input {
+    width: 100%;
+    min-width: 0;
+    height: var(--control-h);
+    padding-inline: var(--space-3);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background-color: color-mix(in oklab, var(--surface) 70%, transparent);
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    color: var(--text);
+  }
+  .agent-input::placeholder {
+    color: var(--text-muted);
+  }
+  .agent-input:focus-visible {
+    outline-offset: 0;
+    border-color: var(--primary);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ember-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@keyframes rail-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-dash {
+  50% {
+    stroke-dasharray: 16 25 92 72;
+  }
+  to {
+    stroke-dasharray: 4 250 22 22;
+  }
+}
+
+/* The card-to-lightbox morph. */
+::view-transition-group(project-morph) {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-out);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-base);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .flip-face,
+  .js .is-flipped .flip-front,
+  .js .is-flipped .flip-back {
+    transition: none;
+  }
+  .lightbox-item,
+  .agent-dock-panel {
+    animation: none;
+  }
+  .rise,
+  .ember-dot,
+  .orbit-ring,
+  .orbit-ring circle,
+  .agent-log li,
+  .agent-rail li[data-state="running"]::before {
+    animation: none;
+  }
+  [data-reveal] {
+    transition: none;
+  }
+  .js [data-reveal]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .press:active,
+  [data-magnetic]:active {
+    transform: none;
+  }
+  .logo-mark-trace,
+  .nudge,
+  [data-tilt],
+  [data-magnetic] {
+    transition: none;
+  }
+}
+
+@media print {
+  .agent-dock,
+  .field,
+  .skip-link {
+    display: none;
+  }
+}

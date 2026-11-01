@@ -1,0 +1,29 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<header class="wrap pb-8 pt-12 lg:pb-12 lg:pt-16">
+  <div
+    class="flex flex-col-reverse items-start justify-between gap-8 md:flex-row md:items-center"
+  >
+    <div class="min-w-0">
+      <h1
+        class="heat-text rise font-display text-3xl font-semibold md:text-display"
+        data-heat
+      >
+        {title}
+      </h1>
+      <div
+        class="rise mt-6 max-w-measure space-y-3 text-lg text-muted"
+        style="--i: 1"
+      >
+        <slot />
+      </div>
+    </div>
+    <slot name="aside" />
+  </div>
+</header>

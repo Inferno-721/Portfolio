@@ -1,0 +1,42 @@
+---
+import PaperCard from "@/shared/ui/paper-card.astro";
+import results from "../eval-results.json";
+
+const evalLabel =
+  results.mode === "live"
+    ? `${results.passed}/${results.total} cases passing against ${results.model}.`
+    : `${results.passed}/${results.total} offline cases passing on routing and retrieval.`;
+
+const steps = [
+  {
+    title: "Deterministic gate",
+    text: "Contact, résumé and GitHub questions have one right answer, so they skip the model. No latency, no tokens, nothing to hallucinate.",
+  },
+  {
+    title: "Streaming agent loop",
+    text: "Everything else goes to Gemini in a tool-use loop capped at 3 turns. The console above shows each real step as it happens.",
+  },
+  {
+    title: "Grounded tools",
+    text: "Four read-only tools return structured facts, with BM25 search over atomic chunks. The agent is told to state only what a tool returned.",
+  },
+  {
+    title: "Evals and fallback",
+    text: `${evalLabel} If the model fails, the answer falls back to search rather than an error.`,
+  },
+];
+---
+
+<ol class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+  {
+    steps.map(({ title, text }, index) => (
+      <li data-reveal style={`--i: ${index}`}>
+        <PaperCard seed={index + 71}>
+          <p class="font-mono text-xs text-primary">0{index + 1}</p>
+          <h3 class="mt-2 font-display text-lg font-semibold">{title}</h3>
+          <p class="mt-2 text-sm text-muted">{text}</p>
+        </PaperCard>
+      </li>
+    ))
+  }
+</ol>

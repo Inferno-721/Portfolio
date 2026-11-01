@@ -1,0 +1,11 @@
+{
+  "linkedinProfile": "https://www.linkedin.com/in/shubham-joshi-721inferno/",
+  "rssFeeds": [
+    {
+      "name": "Medium",
+      "url": "https://medium.com/feed/@21joshishubham"
+    }
+  ],
+  "latestPostsPerRun": 5,
+  "maxStoredPosts": 200
+}

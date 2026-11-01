@@ -1,0 +1,67 @@
+---
+import { work } from "@cv";
+import { formatDateRange } from "@/shared/format-date-range";
+import PaperCard from "@/shared/ui/paper-card.astro";
+---
+
+<div class="space-y-4">
+  {
+    work.map(
+      (
+        {
+          company,
+          position,
+          location,
+          url,
+          startDate,
+          endDate,
+          highlights,
+          stack,
+        },
+        index,
+      ) => (
+        <article data-reveal>
+          <PaperCard seed={index + 31} tilt="subtle">
+            <header class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <h3 class="font-display text-xl font-semibold">
+                {url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="press hover:text-primary"
+                  >
+                    {company}
+                  </a>
+                ) : (
+                  company
+                )}
+              </h3>
+              <p class="shrink-0 font-mono text-xs text-muted">
+                {formatDateRange(startDate, endDate)}
+              </p>
+            </header>
+            <p class="mt-1 text-sm text-muted">
+              {position}, {location}
+            </p>
+            <ul class="mt-4 space-y-3">
+              {highlights.map(({ title, text }) => (
+                <li class="max-w-measure">
+                  <span class="font-medium">{title}.</span>{" "}
+                  <span class="text-muted">{text}</span>
+                </li>
+              ))}
+            </ul>
+            {stack.length > 0 && (
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {stack.map((item) => (
+                  <li class="chip">{item}</li>
+                ))}
+              </ul>
+            )}
+          </PaperCard>
+        </article>
+      ),
+    )
+  }
+</div>

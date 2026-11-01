@@ -1,0 +1,59 @@
+---
+import { Icon } from "astro-icon/components";
+import { NAV_LINKS, SITE } from "@/shared/site";
+import LogoMark from "./logo-mark.astro";
+import ThemeToggle from "./theme-toggle.astro";
+
+const current = Astro.url.pathname.replace(/\/$/, "");
+const linkClass =
+  "press flex h-control items-center rounded-full px-2 text-sm text-muted hover:text-ink aria-[current=page]:bg-raised aria-[current=page]:text-ink sm:px-3";
+---
+
+<header class="wrap sticky top-2 z-10 mt-2">
+  <div
+    class="glass glass-strong flex h-header items-center justify-between gap-2 rounded-full pl-3 pr-1 sm:pl-4 sm:pr-2"
+    data-spotlight
+  >
+    <a
+      href="/"
+      class="press group flex items-center gap-3 font-display text-lg font-semibold tracking-tight"
+      aria-label={`${SITE.name}, home`}
+    >
+      <LogoMark />
+      <span class="hidden md:inline">{SITE.name}</span>
+    </a>
+
+    <nav aria-label="Main" class="flex items-center gap-1">
+      {
+        NAV_LINKS.map(({ label, href }) => (
+          <a
+            href={href}
+            class={linkClass}
+            aria-current={current === href ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <a
+        href={SITE.resumeHref}
+        download={SITE.resumeFilename}
+        class:list={[linkClass, "gap-2 text-ink"]}
+        aria-label="Download résumé"
+      >
+        <Icon name="file-down" size={16} aria-hidden="true" />
+        <span class="hidden sm:inline">Résumé</span>
+      </a>
+      <div class="hidden min-[360px]:block">
+        <ThemeToggle />
+      </div>
+      <a
+        href="/#ask"
+        data-magnetic
+        class="hidden h-control items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-text hover:bg-primary-hover lg:flex"
+      >
+        Ask my AI
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,16 @@
+---
+import AgentPanel from "./agent-panel.astro";
+---
+
+<section
+  id="ask"
+  class="glass"
+  aria-labelledby="agent-title"
+  data-paper-host
+  data-spotlight
+>
+  <canvas class="paper" data-paper data-seed="99" aria-hidden="true"></canvas>
+  <div class="relative p-4 md:p-6">
+    <AgentPanel headingId="agent-title" />
+  </div>
+</section>

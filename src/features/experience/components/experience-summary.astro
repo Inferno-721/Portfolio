@@ -1,0 +1,25 @@
+---
+import { work } from "@cv";
+import { formatDateRange } from "@/shared/format-date-range";
+import PaperCard from "@/shared/ui/paper-card.astro";
+---
+
+<div data-reveal>
+  <PaperCard seed={91} tilt="subtle">
+    <ul class="-my-4 divide-y">
+      {
+        work.map(({ position, company, startDate, endDate }) => (
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <p class="flex flex-wrap items-baseline gap-x-3">
+              <span class="font-medium">{company}</span>
+              <span class="text-sm text-muted">{position}</span>
+            </p>
+            <p class="shrink-0 font-mono text-xs text-muted">
+              {formatDateRange(startDate, endDate)}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </PaperCard>
+</div>

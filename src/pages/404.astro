@@ -1,0 +1,14 @@
+---
+import SiteLayout from "./_site-layout.astro";
+import ActionLink from "@/shared/ui/action-link.astro";
+import PageHeading from "@/shared/ui/page-heading.astro";
+---
+
+<SiteLayout title="Page not found">
+  <PageHeading title="Page not found">
+    <p>That link doesn't lead anywhere on this site.</p>
+    <div class="pt-3">
+      <ActionLink href="/" variant="primary">Back to home</ActionLink>
+    </div>
+  </PageHeading>
+</SiteLayout>

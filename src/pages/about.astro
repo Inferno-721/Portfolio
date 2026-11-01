@@ -1,21 +1,37 @@
 ---
-import Awards from "@/components/Awards.astro";
-import Heading from "@/components/Heading.astro";
-import Education from "@/components/Education.astro";
-import Experience from "@/components/Experience.astro";
-import Skills from "@/components/Skills.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { SITE } from "@/consts";
+import {
+  AchievementList,
+  EducationList,
+  SkillTable,
+} from "@/features/credentials";
+import { ExperienceTimeline } from "@/features/experience";
+import { AboutHeading, ContactBand, Principles } from "@/features/profile";
+import SiteLayout from "./_site-layout.astro";
+import Section from "@/shared/ui/section.astro";
 ---
 
-<BaseLayout title="About" description={SITE.DESCRIPTION}>
-  <div class="container mx-auto my-24 xl:my-5">
-    <Heading title="About Me" />
-    <div class="space-y-8 md:col-span-4">
-      <Experience />
-      <Skills />
-      <Awards class="order-first" />
-      <Education class="order-first" />
+<SiteLayout
+  title="About"
+  description="Shubham Joshi's AI engineering experience, and how they build multi-agent LLM systems that hold up in production."
+>
+  <AboutHeading />
+  <Section
+    title="How I build AI systems"
+    lede="What building agents in production has taught me."
+  >
+    <Principles />
+  </Section>
+  <Section title="Experience">
+    <ExperienceTimeline />
+  </Section>
+  <Section title="Toolbox">
+    <SkillTable />
+  </Section>
+  <Section title="Recognition and education">
+    <div class="space-y-4">
+      <AchievementList />
+      <EducationList />
     </div>
-  </div>
-</BaseLayout>
+  </Section>
+  <ContactBand />
+</SiteLayout>

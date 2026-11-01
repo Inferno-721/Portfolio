@@ -1,0 +1,57 @@
+---
+import { basics } from "@cv";
+import { AgentConsole } from "@/features/agent";
+import ActionLink from "@/shared/ui/action-link.astro";
+import { SITE } from "@/shared/site";
+import LogoOrbit from "./logo-orbit.astro";
+
+const [firstName, lastName] = basics.name.split(" ");
+---
+
+<section
+  class="wrap grid items-center gap-12 pb-12 pt-8 lg:grid-cols-12 lg:gap-8 lg:pb-16 lg:pt-12"
+>
+  <div class="lg:col-span-6">
+    <div class="rise flex items-center gap-4">
+      <LogoOrbit size="sm" />
+      <p class="flex items-center gap-3 font-mono text-xs text-muted">
+        <span class="ember-dot" aria-hidden="true"></span>
+        {basics.currentRole}
+      </p>
+    </div>
+    <h1
+      class="heat-text rise mt-6 font-display text-display font-semibold"
+      style="--i: 1"
+      data-heat
+    >
+      {firstName}<br />{lastName}
+    </h1>
+    <p class="rise mt-8 max-w-measure text-lg" style="--i: 2">
+      {basics.summary}
+    </p>
+    <div class="rise mt-8 flex flex-wrap gap-3" style="--i: 3">
+      <ActionLink
+        href={SITE.resumeHref}
+        download={SITE.resumeFilename}
+        icon="file-down"
+        variant="primary"
+      >
+        Download résumé
+      </ActionLink>
+      {
+        basics.socials.map(({ network, label, url }) => (
+          <ActionLink
+            href={url}
+            icon={network}
+            newTab={!url.startsWith("mailto:")}
+          >
+            {label}
+          </ActionLink>
+        ))
+      }
+    </div>
+  </div>
+  <div class="rise min-w-0 lg:col-span-6" style="--i: 2">
+    <AgentConsole />
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import { basics } from "@cv";
+import ActionLink from "@/shared/ui/action-link.astro";
+
+type Props = {
+  highlightFirst?: boolean;
+};
+
+const { highlightFirst = false } = Astro.props;
+const channels = basics.socials.filter(({ network }) =>
+  ["linkedin", "medium"].includes(network),
+);
+---
+
+<div class="flex flex-wrap gap-3">
+  {
+    channels.map(({ network, label, url }, index) => (
+      <ActionLink
+        href={url}
+        icon={network}
+        variant={highlightFirst && index === 0 ? "primary" : "quiet"}
+        newTab
+      >
+        {label}
+      </ActionLink>
+    ))
+  }
+</div>

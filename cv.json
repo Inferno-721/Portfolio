@@ -2,227 +2,463 @@
   "basics": {
     "name": "Shubham Joshi",
     "nickname": "Inferno",
-    "label": "Data Scientist with expertise in AI technologies",
-    "summary": "Passionate about building innovative solutions and contributing to Data world. Experienced in Data Science with a focus on modern AI technologies.",
-    "location": {
-      "city": "",
-      "countryCode": "+91",
-      "region": ""
-    },
+    "label": "AI Engineer",
+    "currentRole": "AI Engineer at String Ventures (Sutra.ai)",
+    "summary": "I build multi-agent LLM systems for production: requests routed by complexity, answers grounded in deterministic tools, and prompts tuned against an eval harness.",
+    "bio": [
+      "I'm an AI engineer. My work comes down to one question: how do you make LLM systems dependable enough to put in front of real users?",
+      "At String Ventures (Sutra.ai) I design multi-agent systems on Google ADK, with specialized agents for intake, forecasting and weather hazards, working over live data. Requests are routed by complexity so simple questions stay fast and cheap. The agents decide what to compute and deterministic code does the computing, which is how the numbers stay correct.",
+      "Before that, at InfoOrigin, I took natural-language analytics to production: an NL2SQL and RAG platform across 200+ database schemas, covering retrieval, query routing, streaming and multi-session conversations. It cut manual analysis effort by over 80%."
+    ],
     "socials": [
       {
-        "network": "email",
-        "url": "mailto:shubham05373@gmail.com"
-      },
-      {
         "network": "github",
-        "url": "https://github.com/Inferno-721/"
+        "label": "GitHub",
+        "handle": "Inferno-721",
+        "url": "https://github.com/Inferno-721"
       },
       {
         "network": "linkedin",
-        "url": "https://www.linkedin.com/in/shubham-joshi-840a1b1ba/"
+        "label": "LinkedIn",
+        "handle": "shubham-joshi-721inferno",
+        "url": "https://www.linkedin.com/in/shubham-joshi-721inferno/"
+      },
+      {
+        "network": "medium",
+        "label": "Medium",
+        "handle": "@21joshishubham",
+        "url": "https://medium.com/@21joshishubham"
+      },
+      {
+        "network": "email",
+        "label": "Email",
+        "handle": "shubham05373@gmail.com",
+        "url": "mailto:shubham05373@gmail.com"
       }
     ]
   },
+  "metrics": [
+    {
+      "value": "8+",
+      "label": "specialized agents coordinated in one hierarchical LLM system"
+    },
+    {
+      "value": "108",
+      "label": "weather attributes computed deterministically, not generated"
+    },
+    {
+      "value": "60/60",
+      "label": "natural-language queries passing the eval harness"
+    },
+    {
+      "value": "200+",
+      "label": "database schemas behind an NL2SQL platform serving 70+ queries a day"
+    }
+  ],
   "work": [
     {
-      "name": "Sutra.ai",
+      "company": "String Ventures (Sutra.ai)",
       "position": "AI Engineer",
-      "location_type": "Remote",
       "location": "Michigan, USA",
       "url": "https://sutra.ai/",
       "startDate": "2025-01-01",
-      "endDate": "2025-07-15",
-      "summary": "Working on creating data pipelines and optimising python code by implementing LLMs",
-      "responsibilities": [
-        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",
-        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",
-        "Migrated VBA code to Python and created comprehensive documentation, reducing processing time and improving client support."
+      "endDate": null,
+      "highlights": [
+        {
+          "title": "Multi-agent orchestration",
+          "text": "Architected a hierarchical LLM system on Google ADK coordinating 8+ specialized agents (intake router, forecast sub-orchestrator, hazard, lightning and hail specialists), with LiteLLM cross-provider failover."
+        },
+        {
+          "title": "Cost-aware routing",
+          "text": "A 3-tier complexity router maps each request to the right model and reasoning effort, and a deterministic fast-path gate collapses simple queries to a single LLM call to cut latency and token cost."
+        },
+        {
+          "title": "Grounded numbers",
+          "text": "Designed the function-calling layer: agents select transforms while a registry-driven engine computes 108 weather attributes across 7 summarizer types over live FLASH Weather AI data, eliminating numeric hallucination in responses."
+        },
+        {
+          "title": "Eval-first prompting",
+          "text": "Built a 60-query natural-language eval harness with deterministic pass/fail checks, and tuned prompts, routing signals and complexity tiers to a 60/60 pass rate."
+        },
+        {
+          "title": "Conversation memory",
+          "text": "Added LLM-based memory that summarizes multi-turn context for cross-session continuity."
+        }
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Google ADK",
+        "LiteLLM",
+        "Prompt Engineering",
+        "Function Calling",
+        "Eval Harnesses"
       ]
     },
     {
-      "name": "Sutra.ai (Stealth Mode)",
-      "position": "AI Intern",
-      "location_type": "Remote",
-      "location": "India",
-      "url": "https://sutra.ai/",
-      "startDate": "2025-01-01",
-      "endDate": "2025-07-15",
-      "summary": "Working on creating data pipelines and optimising python code by implementing LLMs",
-      "responsibilities": [
-        "Developed LLM-based functions to enhance automation and decision-making capabilities in AI-driven applications.",
-        "Optimized and built data pipelines and databases, improving data flow efficiency and scalability for real-time processing.",
-        "Migrated VBA code to Python and created comprehensive documentation, reducing processing time and improving client support."
-      ]
-    },
-    {
-      "name": "InfoOrigin.INC",
-      "position": "Data Science Intern",
-      "location_type": "Remote",
-      "location": "India",
+      "company": "InfoOrigin",
+      "position": "Data Science Intern (Part-time)",
+      "location": "Noida, India",
       "url": "https://infoorigin.com/",
-      "startDate": "2024-12-16",
-      "endDate": "2025-06-30",
-      "summary": "Gained expertise in LLMs, transformers, and data science through hands-on implementation, dashboard reviews, and structured learning.",
-      "responsibilities": [
-        "Implemented transformers using PyTorch, Hugging Face, and LlamaIndex for AI applications.",
-        "Completed courses on Python, Data Science, Machine Learning, and Hugging Face Agents.",
-        "Reviewed LLM response dashboards and conducted chart story analysis for AI evaluation. "
+      "startDate": "2024-12-01",
+      "endDate": "2025-07-01",
+      "highlights": [
+        {
+          "title": "NL2SQL and RAG platform",
+          "text": "Built and productionized a platform for natural-language querying and report generation across 200+ database schemas, serving 70+ queries daily, using Qdrant, semantic search and LLMs for query routing."
+        },
+        {
+          "title": "Analytics automation",
+          "text": "Automated end-to-end analytics workflows with streaming APIs, multi-session conversation management and context retrieval, reducing manual analysis effort by over 80%."
+        }
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "SQL",
+        "RAG",
+        "Qdrant",
+        "Embeddings",
+        "Streaming APIs"
       ]
     },
     {
-      "name": "CSIR National Aerospace Labrotaries (NAL), Bengaluru",
+      "company": "CSIR National Aerospace Laboratories",
       "position": "Research Intern",
-      "location_type": "On-site",
-      "location": "Bengaluru, Karnataka, India",
+      "location": "Bengaluru, India",
       "url": "https://www.nal.res.in/",
       "startDate": "2023-06-01",
-      "endDate": "2023-07-15",
-      "summary": "Designed and developed a UAV for surveillance and monitoring applications.",
-      "responsibilities": [
-        "Designed a surveillance system for UAVs to improve stability and accuracy.",
-        "Used data-driven insights to enhance UAV performance and innovation."
-      ]
+      "endDate": "2023-07-01",
+      "highlights": [
+        {
+          "title": "UAV surveillance",
+          "text": "Designed a surveillance system for UAVs to improve stability and accuracy, using data-driven insights to enhance performance."
+        }
+      ],
+      "stack": []
     },
     {
-      "name": "Personifwy {Microsoft Certified}",
+      "company": "Personifwy",
       "position": "Data Science Intern",
-      "location_type": "Remote",
-      "location": "India",
-      "url": "",
+      "location": "Remote, India",
+      "url": null,
       "startDate": "2022-11-01",
-      "endDate": "2023-01-15",
-      "summary": "Designed and developed a Chatbot for a startup using LLMs and transformers.",
-      "responsibilities": [
-        "Developed a Chatbot using LLMs and transformers for a startup, enhancing user interaction and support.",
-        "Implemented a recommendation system using LLMs and transformers, improving user experience and engagement."
-      ]
+      "endDate": "2023-01-01",
+      "highlights": [
+        {
+          "title": "Chatbot and recommendations",
+          "text": "Developed a chatbot and a recommendation system for a startup using LLMs and transformers."
+        }
+      ],
+      "stack": []
     }
   ],
   "education": [
     {
-      "institution": "Indian Institute of Information Technology Jabalpur",
-      "url": "https://iiitdmj.ac.in/",
-      "area": "Smart Manufacturing",
-      "studyType": "Bachelor of Technology",
-      "startDate": "2021-08-01",
-      "endDate": "2025-08-01",
-      "summary": "CGPA: 8.0"
+      "institution": "Indian Institute of Information Technology, Design and Manufacturing, Jabalpur",
+      "url": "https://www.iiitdmj.ac.in/",
+      "degree": "B.Tech, Smart Manufacturing",
+      "startDate": "2021-12-01",
+      "endDate": "2025-07-01",
+      "note": "GPA 8.0 / 10.0"
     }
   ],
-  "awards": [
+  "achievements": [
     {
-      "title": "Jensys 2023 Student Ambassador",
-      "date": "2023",
-      "awarder": "AFS India, AFS Japan and Ministry of Foreign Affairs, Japan",
-      "summary": "Invited as a Indian representative and speaker at the Ministry of Foreign Affairs, Japan. Delivered a lightning talk on my journey in Japan and conducted a live disscussions showcasing the Indian culture in Japan."
+      "title": "JENESYS Scholar",
+      "detail": "Represented India in Japan as 1 of 30 students selected nationwide for academic and leadership excellence.",
+      "date": "2023"
     },
     {
-      "title": "Drone Development Challenge Winner",
-      "date": "2023",
-      "awarder": "SAE India",
-      "summary": "Developed a high-performance UAV, winning the Drone Development Challenge through advanced aerodynamics and CFD analysis."
-    },
-    {
-      "title": "LeetCode Achievement",
-      "date": "Ongoing",
-      "awarder": "LeetCode",
-      "summary": "Solved 250+ questions on LeetCode (Profile: Inferno721)"
+      "title": "All India Rank 1, Data Analysis (DDC 2023)",
+      "detail": "Secured 1st place among 50+ national teams.",
+      "date": "2023"
     }
   ],
-  "skills": {
-    "programming_languages": [
-      "Python",
-      "SQL",
-      "R"
-    ],
-    "frameworks": [
-      "LlamaIndex",
-      "Tensorflow",
-      "Keras",
-      "PyTorch",
-      "Hugging Face"
-    ],
-    "libraries": [
-      "Pandas",
-      "NumPy",
-      "Matplotlib",
-      "Seaborn",
-      "Scikit-learn",
-      "NLTK",
-      "Spacy",
-      "OpenCV",
-      "BeautifulSoup",
-      "Streamlit",
-      "Plotly",
-      "Transformers"
-    ],
-    "databases": [
-      "MySQL",
-      "PostgreSQL",
-      "ChromaDB"
-    ],
-    "tools": [
-      "Git",
-      "Docker",
-      "VS Code",
-      "Jupyter Notebook",
-      "Google Colab",
-      "Tableau",
-      "Power BI",
-      "Excel"
-    ]
-  },
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["Python", "SQL", "Go"]
+    },
+    {
+      "category": "Agents and LLMs",
+      "items": [
+        "Google ADK",
+        "LangGraph",
+        "LangChain",
+        "LlamaIndex",
+        "LiteLLM",
+        "Model Context Protocol",
+        "Function calling",
+        "Prompt engineering",
+        "Eval harnesses"
+      ]
+    },
+    {
+      "category": "Retrieval",
+      "items": [
+        "RAG",
+        "NL2SQL",
+        "Qdrant",
+        "Vector databases",
+        "Embeddings",
+        "Semantic search",
+        "RAGAS"
+      ]
+    },
+    {
+      "category": "Backend",
+      "items": [
+        "FastAPI",
+        "Streaming APIs",
+        "REST APIs",
+        "OAuth 2.0",
+        "Docker",
+        "Streamlit"
+      ]
+    },
+    {
+      "category": "Machine learning",
+      "items": [
+        "Generative AI",
+        "Transformers",
+        "Hugging Face",
+        "Deep learning",
+        "Machine learning"
+      ]
+    },
+    {
+      "category": "Tools",
+      "items": [
+        "Git",
+        "GitHub",
+        "Jupyter",
+        "VS Code",
+        "PyCharm",
+        "Metabase",
+        "Power BI"
+      ]
+    }
+  ],
   "projects": [
     {
-      "name": "CLOD",
-      "description": "Cold email generator using LLMs",
-      "url": "https://github.com/Inferno-721/Clod",
+      "name": "CRM MCP Server",
+      "featured": true,
+      "url": null,
+      "note": "Private repo",
+      "description": "A production MCP server in Go that lets external AI agents work inside a multi-tenant CRM, with a person approving every write.",
       "highlights": [
-        "Automates the creation of personalized cold emails by analyzing job descriptions.",
-        "Extracts key details using GROQ, matches relevance with Chroma DB, and generates drafts with Llama 3.1. ",
-        "Allows customization of tone and content to align with different job applications.",
-        "Simplifies the job application process by requiring only a job description link."
+        "Secured with OAuth 2.0 and role-based tool permissions, enabling agents to run a full 5-step prospecting workflow end to end.",
+        "Agent research is stored outside the CRM first and only written in after a person reviews and approves it.",
+        "Automated reports flag incomplete records, cutting manual data entry."
       ],
-      "technologies": [
+      "stack": [
+        "Go",
+        "Model Context Protocol",
+        "OAuth 2.0",
+        "REST APIs",
+        "Agentic workflows"
+      ],
+      "flow": [
+        "External AI agent",
+        "OAuth 2.0 and role check",
+        "MCP tools in Go",
+        "Staged research",
+        "Human approval",
+        "CRM write"
+      ]
+    },
+    {
+      "name": "Portfolio Agent",
+      "featured": true,
+      "url": "https://github.com/Inferno-721/Portfolio/tree/main/src/features/agent",
+      "note": "Running on this site",
+      "description": "The AI agent you can talk to on this site's home page. It answers questions about my work from structured data, and shows every step it takes as it works.",
+      "highlights": [
+        "A deterministic gate answers fixed questions with no LLM call. Everything else goes to a streaming tool-use loop on Gemini, capped at 3 turns.",
+        "Four read-only tools over structured data keep answers grounded, with BM25 retrieval over atomic facts.",
+        "If the model fails, answers fall back to search instead of an error, and an eval harness checks behaviour with deterministic pass/fail cases."
+      ],
+      "stack": [
+        "TypeScript",
+        "Gemini API",
+        "Tool use",
+        "SSE streaming",
+        "BM25",
+        "Eval harness"
+      ],
+      "flow": [
+        "Question",
+        "Deterministic gate",
+        "Gemini tool loop",
+        "Read-only tools",
+        "Grounded answer"
+      ]
+    },
+    {
+      "name": "Contract Risk Intelligence",
+      "featured": true,
+      "url": "https://github.com/Inferno-721/Multi-Agent-Contract-Risk-Intelligence-System",
+      "note": "NVIDIA Agentic AI Open Hackathon",
+      "description": "A six-agent workflow that reads a legal contract and produces a plain-English risk report, with a final risk score and questions to ask before signing.",
+      "highlights": [
+        "Clause, risk, obligation, plain-language, negotiation and summary agents run as a deterministic pipeline.",
+        "Only the clause agent reads the full document. Every downstream agent works from the compact clause list, which keeps token usage low.",
+        "The analysis core is plain LangChain and Pydantic, with the NeMo Agent Toolkit as a thin layer on top for workflow and tracing."
+      ],
+      "stack": [
+        "NVIDIA NeMo Agent Toolkit",
+        "NVIDIA NIM",
+        "LangChain",
+        "Pydantic",
+        "FastAPI",
+        "Streamlit"
+      ],
+      "flow": [
+        "Contract upload",
+        "Parse and chunk",
+        "Clause agent",
+        "Risk, obligation, plain-language and negotiation agents",
+        "Summary agent",
+        "Risk report"
+      ]
+    },
+    {
+      "name": "Conversational RAG Agent",
+      "featured": true,
+      "url": "https://github.com/Inferno-721/Chat-Agent-Rag",
+      "note": null,
+      "description": "A multi-turn RAG agent with LangGraph tool-calling, conversation memory and Qdrant retrieval, measured with RAGAS.",
+      "highlights": [
+        "A LangGraph router decides between retrieval and direct generation, with memory carried across turns.",
+        "MMR retrieval over Qdrant, and FastAPI endpoints for ingest, chat, token streaming over SSE, sessions and evaluation.",
+        "Evaluated with RAGAS on a curated testset and packaged with Docker Compose."
+      ],
+      "stack": ["LangGraph", "Qdrant", "FastAPI", "RAGAS", "Docker Compose"],
+      "flow": [
+        "Ingest and chunk",
+        "Embed into Qdrant",
+        "LangGraph router",
+        "MMR retrieval",
+        "Streamed answer"
+      ]
+    },
+    {
+      "name": "Nichi-Tex",
+      "featured": false,
+      "url": "https://github.com/Inferno-721/Nichi-Tex",
+      "note": null,
+      "description": "Matches a resume against a job description, finds the skill gaps and generates a tailored LaTeX resume.",
+      "highlights": [
+        "Parses PDF and DOCX resumes and job descriptions into structured data.",
+        "Semantic matching with sentence transformers, plus gap analysis with actionable recommendations.",
+        "Exposes the pipeline through FastAPI and outputs ATS-friendly LaTeX."
+      ],
+      "stack": [
         "Python",
-        "GROQ",
-        "Streamlit",
-        "Llama 3.1",
-        "Langchain"
+        "FastAPI",
+        "Pydantic",
+        "Sentence Transformers",
+        "LaTeX"
+      ],
+      "flow": [
+        "Resume and job description",
+        "Parse",
+        "Semantic match",
+        "Gap analysis",
+        "LaTeX resume"
+      ]
+    },
+    {
+      "name": "Bill Converter",
+      "featured": false,
+      "url": "https://github.com/Inferno-721/bill-converter",
+      "note": null,
+      "description": "A hybrid PDF-to-Excel invoice converter with a free rules-based mode and a Gemini-powered Pro mode.",
+      "highlights": [
+        "Free mode uses pdfplumber and regex, with an OCR.space fallback for scans.",
+        "Pro mode hands pdfplumber output to Gemini for extraction."
+      ],
+      "stack": ["Python", "FastAPI", "Streamlit", "pdfplumber", "Gemini"],
+      "flow": [
+        "Invoice PDF",
+        "pdfplumber",
+        "Regex and OCR, or Gemini",
+        "Excel file"
+      ]
+    },
+    {
+      "name": "Billventory",
+      "featured": false,
+      "url": "https://github.com/Inferno-721/billventory",
+      "note": null,
+      "description": "A billing and inventory app for small businesses with AI built into the daily workflow.",
+      "highlights": [
+        "Dashboard for sales, purchases and profit, with stock tracked automatically from transactions.",
+        "Upload an invoice image to auto-fill forms, ask a chat assistant business questions and get monthly AI reports."
+      ],
+      "stack": ["TypeScript", "Gemini"],
+      "flow": [
+        "Invoice image",
+        "Gemini extraction",
+        "Auto-filled bill",
+        "Stock and monthly reports"
       ]
     },
     {
       "name": "TextGen",
-      "description": "A Multi Modal LLM based tool used to genrate step by step instruction",
+      "featured": false,
       "url": "https://github.com/Inferno-721/TextGen",
+      "note": null,
+      "description": "A multimodal LLM tool that generates step-by-step instructions from screenshots.",
       "highlights": [
-        "Developed React-based frontend for a TextGen web app, creating an intuitive and responsive user interface",
-        "Utilized MultiModal LLM Google Gemini for genrating response from screenshots, ensuring scalability and optimal performance",
-        "Implemented robust features, including step-by-step instructions, image recognition, and text generation"
+        "React frontend with Google Gemini handling image recognition and text generation."
       ],
-      "technologies": [
-        "React",
-        "Tailwind CSS",
-        "Gemini",
-        "Git"
-      ]
+      "stack": ["React", "Tailwind CSS", "Gemini"],
+      "flow": ["Screenshot", "Gemini vision", "Step-by-step instructions"]
     },
     {
-      "name": "NL2SQL",
-      "description": "A Natural Language to SQL query generator",
-      "url": "https://github.com/Inferno-721/NL2SQL",
+      "name": "Clod",
+      "featured": false,
+      "url": "https://github.com/Inferno-721/Clod",
+      "note": null,
+      "description": "Generates personalized cold emails from a job description link.",
       "highlights": [
-        "Developed a Natural Language to SQL query generator using LLMs",
-        "Implemented a user-friendly interface for seamless interaction",
-        "Utilized advanced NLP techniques to ensure accurate query generation"
+        "Extracts key details with Groq, matches relevance with ChromaDB and drafts with Llama 3.1, with adjustable tone."
       ],
-      "technologies": [
-        "Python",
-        "Streamlit",
-        "Llamaindex",
-        "Llama 3.1"
+      "stack": ["Python", "Groq", "ChromaDB", "LangChain", "Streamlit"],
+      "flow": [
+        "Job description link",
+        "Groq extraction",
+        "ChromaDB match",
+        "Llama 3.1 draft"
       ]
+    }
+  ],
+  "principles": [
+    {
+      "title": "Let models decide, let code compute",
+      "text": "LLMs are good at choosing what to do and bad at arithmetic. So agents select the transform and a deterministic engine does the math, which removed numeric hallucination across 108 weather attributes."
+    },
+    {
+      "title": "Evals before opinions",
+      "text": "A prompt change isn't better until it passes. I write deterministic pass/fail checks first, then tune prompts, routing signals and complexity tiers against them. One 60-query suite went to 60/60 this way."
+    },
+    {
+      "title": "Not every question needs the big model",
+      "text": "A complexity router picks the model and reasoning effort for each request, and a deterministic gate collapses simple queries to a single LLM call. Both cut latency and token cost."
+    },
+    {
+      "title": "Design for failure",
+      "text": "Providers go down and models misbehave. Cross-provider failover, capped agent loops and fallbacks mean a bad moment produces a useful answer rather than an error page."
+    },
+    {
+      "title": "Agents propose, people approve",
+      "text": "When an agent can write to a real system, its output waits outside that system until a person has reviewed it. Automation saves the time, and a human keeps the accountability."
+    },
+    {
+      "title": "Memory is a design decision",
+      "text": "Conversations need context, but not all of it forever. I summarize multi-turn history with an LLM so agents keep continuity across sessions without dragging the full transcript along."
     }
   ]
 }

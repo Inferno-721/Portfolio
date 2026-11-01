@@ -1,0 +1,24 @@
+---
+import { metrics } from "@cv";
+import PaperCard from "@/shared/ui/paper-card.astro";
+---
+
+<section class="wrap py-6" aria-label="Results at a glance">
+  <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+    {
+      metrics.map(({ value, label }, index) => (
+        <li data-reveal style={`--i: ${index}`}>
+          <PaperCard seed={index + 81}>
+            <span
+              class="text-gradient block font-display text-3xl font-semibold"
+              data-count
+            >
+              {value}
+            </span>
+            <span class="mt-3 block text-sm text-muted">{label}</span>
+          </PaperCard>
+        </li>
+      ))
+    }
+  </ul>
+</section>

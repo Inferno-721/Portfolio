@@ -1,0 +1,68 @@
+---
+import data from "../data/posts.json";
+import type { Post } from "../types.ts";
+import ChannelLinks from "./channel-links.astro";
+import FollowCard from "./follow-card.astro";
+import PostCard from "./post-card.astro";
+
+const posts = data as Post[];
+const sourceNames = [...new Set(posts.map(({ sourceName }) => sourceName))];
+---
+
+{
+  posts.length === 0 ? (
+    <FollowCard />
+  ) : (
+    <div id="post-grid">
+      {sourceNames.length > 1 && (
+        <div
+          class="mb-6 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter by source"
+        >
+          {["All", ...sourceNames].map((name, index) => (
+            <button
+              type="button"
+              class="chip press aria-pressed:border-primary aria-pressed:text-ink"
+              data-filter={name}
+              aria-pressed={index === 0 ? "true" : "false"}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+      )}
+      <ul class="gap-4 md:columns-2 lg:columns-3">
+        {posts.map((post, index) => (
+          <li
+            class="mb-4 break-inside-avoid"
+            data-source={post.sourceName}
+            data-reveal
+          >
+            <PostCard post={post} seed={index + 111} />
+          </li>
+        ))}
+      </ul>
+      <div class="mt-4" data-reveal>
+        <ChannelLinks />
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const grid = document.getElementById("post-grid");
+  grid?.addEventListener("click", (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>(
+      "[data-filter]",
+    );
+    if (!button) return;
+    for (const other of grid.querySelectorAll("[data-filter]")) {
+      other.setAttribute("aria-pressed", String(other === button));
+    }
+    const { filter } = button.dataset;
+    for (const item of grid.querySelectorAll<HTMLElement>("[data-source]")) {
+      item.hidden = filter !== "All" && item.dataset.source !== filter;
+    }
+  });
+</script>

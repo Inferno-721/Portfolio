@@ -1,0 +1,63 @@
+---
+import { SITE } from "@/shared/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title, description = SITE.description } = Astro.props;
+
+const fullTitle = title
+  ? `${title} · ${SITE.name}`
+  : `${SITE.name}, ${SITE.role}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(SITE.ogImage, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<link
+  rel="preload"
+  href="/fonts/bricolage-grotesque-latin-wght-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/inter-latin-wght-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Runs before first paint so the saved theme never flashes. Dark is the default. -->
+<script is:inline>
+  (() => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem("theme");
+    } catch {
+      // Storage can be blocked. Fall through to the default.
+    }
+    const root = document.documentElement;
+    root.classList.toggle("dark", saved !== "light");
+    root.classList.add("js");
+  })();
+</script>
