@@ -57,6 +57,7 @@ function startConsole(root: HTMLElement): void {
   const history: ChatTurn[] = saved?.history ?? [];
   let answerText = saved?.answer ?? "";
   let active: AbortController | null = null;
+  let finished = false;
 
   function renderAnswer(): void {
     answer.textContent = cleanAnswer(answerText);
@@ -135,6 +136,7 @@ function startConsole(root: HTMLElement): void {
         sources.hidden = false;
         break;
       case "done": {
+        finished = true;
         const parts = [
           event.mode === "fast-path"
             ? "fast path"
@@ -156,6 +158,7 @@ function startConsole(root: HTMLElement): void {
     const controller = new AbortController();
     active = controller;
     reset();
+    finished = false;
     suggestions.hidden = true;
     answer.setAttribute("aria-busy", "true");
 
@@ -192,6 +195,13 @@ function startConsole(root: HTMLElement): void {
           }
           boundary = buffer.indexOf("\n\n");
         }
+      }
+
+      // A stream that stops before "done" was cut off, so it isn't saved as an answer.
+      if (!finished) {
+        answerText = "The answer was cut off. Please try again.";
+        renderAnswer();
+        return;
       }
 
       history.push(

@@ -332,3 +332,59 @@ test("the endpoint streams well-formed SSE ending in done, and logs no question 
   assert.ok(!lines[0]?.includes("secret question"));
   assert.equal(JSON.parse(lines[0] ?? "{}").event, "agent_request");
 });
+
+test("a model that stalls falls back to search before the function is stopped", async () => {
+  const stalled: StreamMessage = (_params, signal) => {
+    const stream = {
+      async *[Symbol.asyncIterator]() {
+        await new Promise((_resolve, reject) => {
+          signal?.addEventListener("abort", () => reject(signal.reason));
+        });
+      },
+      finalMessage: () => new Promise(() => {}),
+    };
+    return stream as unknown as MessageStreamLike;
+  };
+  const events: AgentEvent[] = [];
+  const summary = await runAgent({
+    question: "Which vector database was used?",
+    history: [],
+    knowledge,
+    model: "m",
+    streamMessage: stalled,
+    emit: (event) => events.push(event),
+    modelDeadlineMs: 30,
+  });
+  assert.equal(summary.mode, "search");
+  assert.equal(summary.error?.name, "TimeoutError");
+  assert.ok(visibleAnswer(events).includes("Qdrant"));
+  assert.equal(events.at(-1)?.type, "done");
+});
+
+test("a visitor who leaves mid-answer gets no fallback", async () => {
+  const controller = new AbortController();
+  const stalled: StreamMessage = (_params, signal) => {
+    const stream = {
+      async *[Symbol.asyncIterator]() {
+        controller.abort();
+        await new Promise((_resolve, reject) => {
+          if (signal?.aborted) reject(signal.reason);
+        });
+      },
+      finalMessage: () => new Promise(() => {}),
+    };
+    return stream as unknown as MessageStreamLike;
+  };
+  const events: AgentEvent[] = [];
+  const summary = await runAgent({
+    question: "Which vector database was used?",
+    history: [],
+    knowledge,
+    model: "m",
+    streamMessage: stalled,
+    emit: (event) => events.push(event),
+    signal: controller.signal,
+  });
+  assert.equal(summary.error?.name, "Aborted");
+  assert.ok(!events.some((event) => event.type === "done"));
+});

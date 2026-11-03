@@ -7,6 +7,8 @@ import { executeTool, TOOL_DEFINITIONS } from "./tools.ts";
 
 const MAX_TURNS = 3;
 const MAX_TOKENS = 2048;
+// The function is stopped at 30s. Stopping the model at 20s leaves time to answer from search.
+const MODEL_DEADLINE_MS = 20_000;
 const FALLBACK_BETA = "server-side-fallback-2026-07-01";
 
 const SYSTEM_PROMPT = `You are the AI agent on Shubham Joshi's portfolio website. Visitors, often recruiters and engineers, ask you about Shubham's work. You were built by Shubham and you are one of the projects on this site.
@@ -41,6 +43,8 @@ export type RunOptions = {
   streamMessage: StreamMessage | null;
   emit: (event: AgentEvent) => void;
   signal?: AbortSignal;
+  /** Tests shorten this. */
+  modelDeadlineMs?: number;
 };
 
 export type RunSummary = {
@@ -216,6 +220,10 @@ export async function runAgent(options: RunOptions): Promise<RunSummary> {
   ];
   const sources: Source[] = [];
   const supportsFallback = !model.includes("haiku");
+  const deadline = AbortSignal.timeout(
+    options.modelDeadlineMs ?? MODEL_DEADLINE_MS,
+  );
+  const modelSignal = signal ? AbortSignal.any([signal, deadline]) : deadline;
 
   try {
     for (let turn = 1; turn <= MAX_TURNS; turn++) {
@@ -238,7 +246,7 @@ export async function runAgent(options: RunOptions): Promise<RunSummary> {
             ? { betas: [FALLBACK_BETA], fallbacks: "default" as const }
             : {}),
         },
-        signal,
+        modelSignal,
       );
 
       let turnText = "";
